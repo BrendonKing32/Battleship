@@ -34,6 +34,13 @@ h3 {
     font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif
 }
 
+h4 {
+    border-radius: 20px;
+    text-align: center;
+    background: darkgray;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif
+}
+
 p {
     margin-right: 15px;
     margin-left: 15px;
@@ -49,9 +56,9 @@ img {
 }
 
 table, td, th {
-  table-layout: fixed;
-  width: 30px;
-  height: 30px;
-  background: rgb(43, 255, 226);
-  border: 1px solid black;
+    table-layout: fixed;
+    width: 30px;
+    height: 30px;
+    background: rgb(43, 255, 226);
+    border: 1px solid black;
 }
