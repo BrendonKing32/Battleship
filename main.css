@@ -1,5 +1,5 @@
 body {
-    background: lightblue;
+    
 }
 
 .column {
@@ -14,54 +14,26 @@ body {
 }
 
 h1 {
-    text-indent: 10px;
     font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif
 }
 
 h2 {
-    border-radius: 20px;
-    text-indent: 10px;
     background: darkgray;
     font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif
 }
 
 h3 {
-    border-radius: 20px;
-    text-indent: 10px;
-    background: darkgray;
+    background: black;
+    color: white;
     font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif
 }
 
 h4 {
-    border-radius: 20px;
+    
     text-align: center;
-    background: darkgray;
+    background: black;
+    color: white;
     font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif
-}
-
-nav {
-    width: 100%;
-    background-color:darkgray;
-    text-align: center;
-    padding: 10px 0;
-    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif
-}
-
-nav ul{
-    list-style: none;
-    margin: 0 2px;
-    padding: 0;
-    display: flex;
-    justify-content: space-around;
-}
-
-nav a {
-    font-weight: normal;
-    padding: 10px 5px;
-}
-nav a:hover {
-    background-color: black;
-    font: white;
 }
 
 p {
@@ -75,13 +47,17 @@ ol {
 }
 
 img {
-    border-color: rgb(121, 120, 120);
+    border-color: black;
+}
+
+caption {
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif
 }
 
 table, td, th {
     table-layout: fixed;
-    width:20px;
-    height: 20px;
-    background: rgb(43, 255, 226);
+    width:30px;
+    height: 30px;
+    background: lightgray;
     border: 1px solid black;
 }
