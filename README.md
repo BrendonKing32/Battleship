@@ -10,6 +10,6 @@
     <li>Work on basic game logic</li>
 </ul>
 <h2>FIXME</h2>
-<p>No bugs yet!  Add them to the wiki if you find them!</p>
+<p>No bugs yet!</p>
 <ul>
 </ul>
