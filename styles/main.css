@@ -2,11 +2,9 @@
 Name       :Brendon King
 Class      :CS 2550
 Title      :Battleship
+Version    :Version 02
 Description:Semester project for CS 2550 at Utah Valley University.
 */
-body {
-    
-}
 
 .column {
     float: left;
