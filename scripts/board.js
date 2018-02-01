@@ -1,5 +1,12 @@
-function generate_table() {
-    
+/*
+Name       :Brendon King
+Class      :CS 2550
+Title      :board.js
+Version    :Version 01
+Description:Contains the functions necessary to create game board and set up battleship.
+*/
+function GenerateTable() {
+
     // get the reference for the body
     var body = document.getElementsByTagName("body")[0];
 
