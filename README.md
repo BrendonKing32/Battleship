@@ -8,8 +8,9 @@
     <li>Add interactive elements to gameboard.html</li>
     <li>Work on AI</li>
     <li>Work on basic game logic</li>
+    <li>Work on basic board generation</li>
 </ul>
 <h2>FIXME</h2>
-<p>No bugs yet!</p>
 <ul>
+  <li>External JavaScript not connecting/interacting with HTML files.</li>
 </ul>
