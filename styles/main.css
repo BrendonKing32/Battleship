@@ -5,6 +5,9 @@ Title      :Battleship
 Version    :Version 02
 Description:Semester project for CS 2550 at Utah Valley University.
 */
+body {
+    background: #DBE5E4;
+}
 
 .column {
     float: left;
@@ -33,7 +36,7 @@ h3 {
 }
 
 h4 {
-    
+
     text-align: center;
     background: black;
     color: white;
