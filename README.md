@@ -12,5 +12,5 @@
 </ul>
 <h2>FIXME</h2>
 <ul>
-  <li>External JavaScript not connecting/interacting with HTML files.</li>
+  <li>Finish stripe pattern for battleship grids.
 </ul>
