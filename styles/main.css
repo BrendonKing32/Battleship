@@ -68,3 +68,7 @@ table, td, th {
     background: lightgray;
     border: 1px solid black;
 }
+
+td:hover {
+  background: gray;
+}
