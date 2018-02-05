@@ -16,14 +16,19 @@ function GenerateTable(numRows, numColumns) {
               var cell = document.createElement("td");
               var cellText = document.createTextNode((j));
             }
+
             else if (i >= 1 && j == 0) {
               var cell = document.createElement("td");
               var cellText = document.createTextNode(((i + 9).toString(36)).toUpperCase());
-              cell.setAttribute("backgroundColor", "#d1d3d6");
+              cell.setAttribute("style", "background:darkgray");
             }
             else {
               var cell = document.createElement("td");
               var cellText = document.createTextNode("");
+              cell.setAttribute("style", "background:lightgray")
+            }
+            if (i == 0) {
+                cell.setAttribute("style", "background:darkgray");
             }
             cell.appendChild(cellText);
             row.appendChild(cell);
