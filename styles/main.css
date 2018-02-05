@@ -61,14 +61,9 @@ caption {
     font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif
 }
 
-table, td, th {
+td {
     table-layout: fixed;
-    width:30px;
-    height: 30px;
-    background: lightgray;
-    border: 1px solid black;
-}
-
-td:hover {
-  background: gray;
+    width: 25px;
+    height: 25px;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif
 }
