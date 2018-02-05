@@ -20,15 +20,15 @@ function GenerateTable(numRows, numColumns) {
             else if (i >= 1 && j == 0) {
               var cell = document.createElement("td");
               var cellText = document.createTextNode(((i + 9).toString(36)).toUpperCase());
-              cell.setAttribute("style", "background:darkgray");
+              cell.setAttribute("style", "background:#616366");
             }
             else {
               var cell = document.createElement("td");
               var cellText = document.createTextNode("");
-              cell.setAttribute("style", "background:lightgray")
+              cell.setAttribute("style", "background:lightgray");
             }
             if (i == 0) {
-                cell.setAttribute("style", "background:darkgray");
+                cell.setAttribute("style", "background:#616366");
             }
             cell.appendChild(cellText);
             row.appendChild(cell);
@@ -36,8 +36,9 @@ function GenerateTable(numRows, numColumns) {
         }
         tblBody.appendChild(row);
     }
+    // TODO: Justify text node contents into center of cell
     tbl.appendChild(tblBody);
     body.appendChild(tbl);
-    tbl.setAttribute("border", "1");
+    tbl.setAttribute("border", "0");
     tbl.setAttribute("align", "center");
 }
