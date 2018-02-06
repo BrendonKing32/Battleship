@@ -42,3 +42,7 @@ function GenerateTable(numRows, numColumns) {
     tbl.setAttribute("border", "0");
     tbl.setAttribute("align", "center");
 }
+
+function GenerateControls() {
+  
+}
