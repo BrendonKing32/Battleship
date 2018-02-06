@@ -5,6 +5,11 @@ Title      :board.js
 Version    :Version 01
 Description:Contains the functions necessary to create game board and set up battleship.
 */
+
+//Method    :GenerateTable
+//Purpose   :create the game boards that the players will use
+//Parameters:int numRows, int numCOlumns
+//Returns   :none
 function GenerateTable(numRows, numColumns) {
     var body = document.getElementsByClassName('column')[0];
     var tbl = document.createElement("table");
@@ -43,6 +48,10 @@ function GenerateTable(numRows, numColumns) {
     tbl.setAttribute("align", "center");
 }
 
+//Method    :GenerateControls
+//Purpose   :Create and append the controls to gameboard.html
+//Parameters:none
+//Returns   :none
 function GenerateControls() {
-  
+
 }
