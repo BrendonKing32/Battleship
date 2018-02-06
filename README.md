@@ -9,8 +9,8 @@
     <li>Work on AI</li>
     <li>Work on basic game logic</li>
     <li>Work on basic board generation</li>
+    <li>Finish control boards/li>
 </ul>
 <h2>FIXME</h2>
 <ul>
-  <li>Finish stripe pattern for battleship grids.
 </ul>
