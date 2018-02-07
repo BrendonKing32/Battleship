@@ -78,7 +78,7 @@ caption {
 }
 
 table {
-  background: #2d2f33;
+  background: #1a1b1d;
 }
 
 td, th {
@@ -90,5 +90,5 @@ td, th {
 }
 
 td:hover {
-  style: background:darkgray;
+  background: darkgray;
 }
