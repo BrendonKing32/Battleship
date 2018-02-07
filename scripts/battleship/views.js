@@ -48,10 +48,10 @@ function GenerateTable(numRows, numColumns) {
     tbl.setAttribute("align", "center");
 }
 
-//Method    :GenerateControls
+//Method    :GenerateForm
 //Purpose   :Create and append the controls to gameboard.html
 //Parameters:none
 //Returns   :none
-function GenerateControls() {
-    
+function GenerateForm() {
+
 }
