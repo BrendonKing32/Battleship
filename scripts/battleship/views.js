@@ -53,5 +53,5 @@ function GenerateTable(numRows, numColumns) {
 //Parameters:none
 //Returns   :none
 function GenerateControls() {
-
+    
 }
