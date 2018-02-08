@@ -3,7 +3,7 @@ Name       :Brendon King
 Class      :CS 2550
 Title      :Battleship/board.js
 Version    :Version 01
-Description:Contains the functions necessary to create game board and set up battleship.
+Description:Contains the functions that serve information to the browser for the user/requestor
 */
 
 //Method    :GenerateTable
