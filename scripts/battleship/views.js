@@ -41,7 +41,6 @@ function GenerateTable(numRows, numColumns) {
         }
         tblBody.appendChild(row);
     }
-    // TODO: Justify text node contents into center of cell
     tbl.appendChild(tblBody);
     body.appendChild(tbl);
     tbl.setAttribute("border", "0");
