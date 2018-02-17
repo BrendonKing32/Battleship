@@ -2,7 +2,7 @@
 Name       :Brendon King
 Class      :CS 2550
 Title      :Battleship/board.js
-Version    :Version 01
+Version    :Version 03
 Description:Contains the functions that serve information to the browser for the user/requestor
 */
 
@@ -10,7 +10,7 @@ Description:Contains the functions that serve information to the browser for the
 //Purpose   :create the game boards that the players will use
 //Parameters:int numRows, int numCOlumns
 //Returns   :none
-function GenerateTable(numRows, numColumns) {
+function GenerateTable(numRows, numColumns, playerID) {
     var body = document.getElementsByClassName('column')[0];
     var tbl = document.createElement("table");
     var tblBody = document.createElement("tbody");
@@ -29,7 +29,13 @@ function GenerateTable(numRows, numColumns) {
             }
             else {
               var cell = document.createElement("td");
-              var cellText = document.createTextNode("");
+              if (playerID == 1) {
+                  var content = GetCellContentP1(i, j);
+              }
+              if (playerID == 2) {
+                  var content = GetCellContentP2(i, j);
+              }
+              var cellText = document.createTextNode(content);
               cell.setAttribute("style", "background:lightgray");
             }
             if (i == 0) {
@@ -48,7 +54,7 @@ function GenerateTable(numRows, numColumns) {
 }
 
 //Method    :GenerateForm
-//Purpose   :Create and append the controls to gameboard.html
+//Purpose   :Create and append the controls to board.html
 //Parameters:none
 //Returns   :none
 function GenerateForm() {

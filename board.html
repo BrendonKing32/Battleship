@@ -1,8 +1,8 @@
 <!--
 Name       :Brendon King
 Class      :CS 2550
-Title      :Battleship/gameboard.html
-Version    :Version 02
+Title      :Battleship/board.html
+Version    :Version 03
 Description:Semester project for CS 2550 at Utah Valley University.
 -->
 <!DOCTYPE html>
@@ -13,9 +13,9 @@ Description:Semester project for CS 2550 at Utah Valley University.
     <title>Splash!</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" type="text/css" media="screen" href="styles/main.css" />
-    <script src="scripts/battleship/views.js"></script>
-    <script src="scripts/battleship/models.js"></script>
-    <script src="scripts/battleship/controllers.js"></script>
+    <script src="scripts/battleship/view.js"></script>
+    <script src="scripts/battleship/model.js"></script>
+    <script src="scripts/battleship/controller.js"></script>
 </head>
 <body>
     <h1 align="center">PLAY BATTLESHIP!</h1>
@@ -23,26 +23,26 @@ Description:Semester project for CS 2550 at Utah Valley University.
         <div id="Player1" class ="column" align="center">
           <h4>Your Board</h4>
           <script>
-            GenerateTable(11,11);
+            GenerateTable(11,11, 1);
           </script>
           <p></p>
           <table>
             <tr>
-              <td style="background:green"><p>S</p></td>
-              <td style="background:red"><p>H</p></td>
-              <td style="background:darkblue"><p>M</p></td>
+              <td style="background:#0f6705"><p>S</p></td>
+              <td style="background:#c11415"><p>H</p></td>
+              <td style="background:#00008b"><p>M</p></td>
             </tr>
           </table>
           <h4>Opponent Board</h4>
           <script>
-            GenerateTable(11,11);
+            GenerateTable(11,11, 2);
           </script>
           <p></p>
           <table>
             <tr>
-              <td style="background:green"><p>S</p></td>
-              <td style="background:red"><p>H</p></td>
-              <td style="background:darkblue"><p>M</p></td>
+              <td style="background:#0f6705"><p>S</p></td>
+              <td style="background:#c11415"><p>H</p></td>
+              <td style="background:#00008b"><p>M</p></td>
             </tr>
           </table>
         </div>
