@@ -3,7 +3,7 @@ Name       :Brendon King
 Class      :CS 2550
 Title      :Battleship/controller.js
 Version    :Version 01
-Description:Contains the functions that control user input. 
+Description:Contains the functions that control user input.
 */
 
 //Method    :StartGame()
@@ -30,10 +30,26 @@ function SaveGame() {
 
 }
 
+//Function  :
+//Purpose   :
+//Parameters:
+//Returns   :
+function SetShipLocation(numRow, numCol) {
+    return [numRow, numCol];
+}
+
 //Method    :
 //Purpose   :
 //Parameters:
 //Returns   :
 function AuthenticateUser() {
 
+}
+
+//Function  :
+//Purpose   :
+//Parameters:
+//Returns   :
+function ThrowAlert() {
+  window.alert("OPTION UNAVAILABLE!");
 }

@@ -8,7 +8,7 @@ Description:Contains the functions that serve information to the browser for the
 
 //Method    :GenerateTable
 //Purpose   :create the game boards that the players will use
-//Parameters:int numRows, int numCOlumns
+//Parameters:int numRows, int numCOlumns, playerID
 //Returns   :none
 function GenerateTable(numRows, numColumns, playerID) {
     var body = document.getElementsByClassName('column')[0];
@@ -29,14 +29,30 @@ function GenerateTable(numRows, numColumns, playerID) {
             }
             else {
               var cell = document.createElement("td");
+              //parse player data into view
               if (playerID == 1) {
                   var content = GetCellContentP1(i, j);
               }
               if (playerID == 2) {
                   var content = GetCellContentP2(i, j);
               }
-              var cellText = document.createTextNode(content);
-              cell.setAttribute("style", "background:lightgray");
+              if (content == "[ ]") {
+                console.log(" Board: " + playerID + " row: " + i + " column: " + j + " content: SHIP");
+                cell.setAttribute("style", "background:green");
+              }
+              else if (content == " x ") {
+                console.log(" Board: " + playerID + " row: " + i + " column: " + j + " content: MISS");
+                cell.setAttribute("style", "background:#000069");
+              }
+              else if (content == "[x]") {
+                console.log(" Board: " + playerID + " row: " + i + " column: " + j + " content: HIT");
+                cell.setAttribute("style", "background:red");
+              }
+              else {
+                cell.setAttribute("style", "background:#43A6FF");
+              }
+              var cellText = document.createTextNode("");
+              //cell.setAttribute("style", "background:lightgray");
             }
             if (i == 0) {
                 cell.setAttribute("style", "background:#616366");

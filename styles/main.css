@@ -87,11 +87,8 @@ table {
 td, th {
     table-layout: fixed;
     text-align: center;
+    border: #1a1b1d;
     width: 40px;
     height: 40px;
     font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif
-}
-
-td:hover {
-  background: darkgray;
 }

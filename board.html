@@ -28,23 +28,15 @@ Description:Semester project for CS 2550 at Utah Valley University.
           <p></p>
           <table>
             <tr>
-              <td style="background:#0f6705"><p>S</p></td>
-              <td style="background:#c11415"><p>H</p></td>
-              <td style="background:#00008b"><p>M</p></td>
+              <td style="background:#008000"><p>Ship</p></td>
+              <td style="background:#ff0000"><p>Hit</p></td>
+              <td style="background:#000069"><p style="color: white">Miss</p></td>
             </tr>
           </table>
           <h4>Opponent Board</h4>
           <script>
             GenerateTable(11,11, 2);
           </script>
-          <p></p>
-          <table>
-            <tr>
-              <td style="background:#0f6705"><p>S</p></td>
-              <td style="background:#c11415"><p>H</p></td>
-              <td style="background:#00008b"><p>M</p></td>
-            </tr>
-          </table>
         </div>
         <div class ="column", id="controls">
           <h4>CONTROLS</h4>
@@ -55,10 +47,10 @@ Description:Semester project for CS 2550 at Utah Valley University.
               <input type="password" name="userPass\t"><br>
             </form>
             <h4>GAME MANAGEMENT</h4>
-            <button>PLACE SHIPS</button>
-            <button>SAVE GAME</button>
-            <button>LOAD GAME</button>
-            <button>CHANGE DIRECTION</button>
+            <button onclick="ThrowAlert()">PLACE SHIPS</button>
+            <button onclick="ThrowAlert()">SAVE GAME</button>
+            <button onclick="ThrowAlert()">LOAD GAME</button>
+            <button onclick="ThrowAlert()">CHANGE DIRECTION</button>
             <button></button>
           </div>
         </div>
