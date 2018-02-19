@@ -6,7 +6,7 @@ Version    :Version 02
 Description:Semester project for CS 2550 at Utah Valley University.
 */
 body {
-    background: #DBE5E4;
+    background: rgb(139, 248, 237);
 }
 
 .column {
@@ -28,7 +28,7 @@ body {
     margin-left: 40px;
     margin-right: 40px;
     align-content: center;
-    background: lightgray;
+    background: #616366;
     border: black;
 }
 

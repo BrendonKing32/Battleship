@@ -38,7 +38,7 @@ function GenerateTable(numRows, numColumns, playerID) {
               }
               if (content == "[ ]") {
                 console.log(" Board: " + playerID + " row: " + i + " column: " + j + " content: SHIP");
-                cell.setAttribute("style", "background:green");
+                cell.setAttribute("style", "background:lightgray");
               }
               else if (content == " x ") {
                 console.log(" Board: " + playerID + " row: " + i + " column: " + j + " content: MISS");
