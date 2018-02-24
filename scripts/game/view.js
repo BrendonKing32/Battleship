@@ -9,7 +9,7 @@ Description:Contains the functions that serve information to the browser for the
 //Method    :GenerateTable
 //Purpose   :create the game boards that the players will use
 //Parameters:int numRows, int numCOlumns, playerID
-//Returns   :none
+//Returns   :table element
 function GenerateTable(numRows, numColumns, playerID) {
     var body = document.getElementsByClassName('column')[0];
     var tbl = document.createElement("table");
@@ -52,7 +52,6 @@ function GenerateTable(numRows, numColumns, playerID) {
                 cell.setAttribute("style", "background:#43A6FF");
               }
               var cellText = document.createTextNode("");
-              //cell.setAttribute("style", "background:lightgray");
             }
             if (i == 0) {
                 cell.setAttribute("style", "background:#616366");
