@@ -6,11 +6,12 @@ Version    :Version 03
 Description:Contains the functions that serve information to the browser for the user/requestor
 */
 
-//Method    :GenerateTable
+//Function  :GenerateTable
 //Purpose   :create the game boards that the players will use
 //Parameters:int numRows, int numCOlumns, playerID
 //Returns   :table element
 function GenerateTable(numRows, numColumns, playerID) {
+    //variable declaration (GET variables from HTML document)
     var body = document.getElementsByClassName('column')[0];
     var tbl = document.createElement("table");
     var tblBody = document.createElement("tbody");
@@ -21,7 +22,6 @@ function GenerateTable(numRows, numColumns, playerID) {
               var cell = document.createElement("td");
               var cellText = document.createTextNode((j));
             }
-
             else if (i >= 1 && j == 0) {
               var cell = document.createElement("td");
               var cellText = document.createTextNode(((i + 9).toString(36)).toUpperCase());
@@ -36,18 +36,22 @@ function GenerateTable(numRows, numColumns, playerID) {
               if (playerID == 2) {
                   var content = GetCellContentP2(i, j);
               }
+              //highlight ship cells
               if (content == "[ ]") {
                 console.log(" Board: " + playerID + " row: " + i + " column: " + j + " content: SHIP");
                 cell.setAttribute("style", "background:lightgray");
               }
+              //highlight struck cells
               else if (content == " x ") {
                 console.log(" Board: " + playerID + " row: " + i + " column: " + j + " content: MISS");
                 cell.setAttribute("style", "background:#000069");
               }
+              //highlight struck ship cells
               else if (content == "[x]") {
                 console.log(" Board: " + playerID + " row: " + i + " column: " + j + " content: HIT");
                 cell.setAttribute("style", "background:red");
               }
+              //highlight all other cells
               else {
                 cell.setAttribute("style", "background:#43A6FF");
               }
@@ -68,7 +72,7 @@ function GenerateTable(numRows, numColumns, playerID) {
     tbl.setAttribute("align", "center");
 }
 
-//Method    :GenerateForm
+//Function  :GenerateForm
 //Purpose   :Create and append the controls to board.html
 //Parameters:none
 //Returns   :none
