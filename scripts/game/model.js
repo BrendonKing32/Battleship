@@ -32,12 +32,27 @@ var boardP2 = [
     [" 9 ", "   ", "   ", "   ", "   ", "   ", "   ", "   ", " x ", "   ", "   "],
     ["10 ", "   ", "   ", "   ", "   ", "   ", "   ", "   ", "   ", "   ", "   "]];
 
-//Function  :Game()
+//Function  :NewGame()
 //Purpose   :Constructor (prototype) for game object, intitializes ships and gameboard
 //Parameters:none
 //Returns   :none
-function Game() {
-    
+function NewGame() {
+    var game = initializeGame();
+    return game;
+}
+
+//Function  :Game()
+//Purpose   :Constructor function for Game object
+//Parameters:
+//Returns   :
+function Game(playerBoard, computerBoard, playerFleet, computerFleet) {
+    this.playerBoard = playerBoard;
+    this.computerBoard = computerBoard;
+    this.playerFleet = playerFleet;
+    this.computerFleet = computerFleet;
+    this.computerGuesses = new Array();
+    this.computerRow = -1;
+    this.computerCol = -1;
 }
 
 //Function  :PlayerFleet()
@@ -69,13 +84,11 @@ function ComputerFleet() {
 
 //Function  :Constructor (prototype) for ship objects
 //Purpose   :Create ships for the players to interact with/set variables
-//Parameters:int playerID, string name, int health, array location, bool isVertical
+//Parameters:int health, array location
 //Returns   :Ship Object
-function Ship(health, location) {
-    this.name = name;
-    this.health = health;
+function Ship(size, location) {
+    this.size = size;
     this.location = location;
-    this.isVertical = isVertical;
     this.isDestroyed = false;
     this.numHits = 0;
 }
@@ -85,8 +98,8 @@ function Ship(health, location) {
 //Parameters:none
 //Returns   :game Object
 function InitializeGame() {
-    var board1 = CreateGrid(10, 10);
-    var board2 = CreateGrid(10, 10);
+    var playerBoard = CreateBoard(10, 10);
+    var computerBoard = CreateBoard(10, 10);
     var playerFleet = new PlayerFleet();
     var computerFleet = new ComputerFleet();
 
@@ -103,14 +116,14 @@ function InitializeGame() {
     computerFleet.Submarine = new Ship(3, []);
     computerFleet.Destroyer = new Ship(3, []);
     computerFleet.PatrolBoat = new Ship(2, []);
-    var game = new Game()
+    var game = new Game(playerBoard, computerBoard, playerFleet, computerFleet);
 }
 
-//Function  :CreateGrid()  
+//Function  :CreateBoard()  
 //Purpose   :
 //Paramaters:
 //Returns   :
-function CreateGrid(x, y) {
+function CreateBoard(x, y) {
     var board = new Array();
     for (var i = 0; i < x; i++) {
         board[i] = new Array();
@@ -119,6 +132,74 @@ function CreateGrid(x, y) {
         }
     }
     return board;
+}
+
+//Function  :
+//Purpose   :
+//Parameters:
+//Returns   :
+function PlaceShip(playerFleet) {
+    var ship = document.getElementById('ship').value;
+    var row = parseInt(document.getElementById('row').value - 1);
+    var col = parseInt(document.getElementById('col').value - 1);
+    if (col > 9 || row > 9) {
+        window.alert("INVALID LOCATION!");
+        return false;
+    }
+    var direction = document.getElementById('direction').value;
+    var location = [];
+    if (playerFleet[ship].shipLocation.length > 0) {
+        window.alert("SHIP HAS ALREADY BEEN PLACED!");
+        return false;
+    }
+    if (direction == 'horizontal') {
+        for (var i = 0; i < playerFleet[ship].size; i++) {
+            if (col + playerFleet[ship].size > 10) {
+                window.alert("INVALID LOCATION!");
+                return false;
+            }
+            location.push({ 'x': col + i, 'y': row });
+        }
+    }
+    else if (direction == 'vertical') {
+        for (var i = 0; i < playerFleet[ship].size; i++) {
+            if (row + playerFleet[ship].size > 10) {
+                window.alert("INVALID LOCATION!");
+                return false;
+            }
+            location.push({ 'x': col, 'y': row + i });
+        }
+    }
+    playerFleet[ship].shipLocation = location;
+    playerFleet.placedCount++;
+    return playerFleet;
+
+}
+
+//Function  :
+//Purpose   :
+//Parameters:
+//Returns   :
+function MarkHit(ship, ships) {
+
+}
+
+//Function  :
+//Purpose   :
+//Parameters:
+//Returns   :
+function markGridHit(row, col, grid) {
+    grid[col][row] = '<td class="hit"><b>HIT</b></td>';
+    return grid;
+}
+
+//Function  :
+//Purpose   :
+//Parameters:
+//Returns   :
+function markGridMiss(row, col, grid) {
+    grid[col][row] = '<td class="miss"><b>MISS</b></td>';
+    return grid;
 }
 
 //Function  :GetCellContentP1()

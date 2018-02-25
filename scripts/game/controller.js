@@ -18,11 +18,8 @@ function main() {
     var PlayerBoard = document.getElementById('Player1Board');
     var ComputerBoard = document.getElementById('Player2Board');
 
-    //initialize grid Player 1
-    game.Player1Board;
-
-    //initialize grid Player 2
-    game.Player2Board;
+    //initialize grids
+    
     
 
 }
