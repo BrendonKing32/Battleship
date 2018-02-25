@@ -6,43 +6,24 @@ Version    :Version 01
 Description:Contains the functions that control user input.
 */
 
-//Method    :StartGame()
-//Purpose   :Begins the game after user clicks btn_Start
-//Parameters:user interaction with object btn_start
-//Returns   :none
-function StartGame() {
+window.onload = main();
 
-}
-
-//Method    :LoadGame()
-//Purpose   :Loads a previous gamestate from JSON after user clicks btn_Load
-//Parameters:
-//Returns   :
-function LoadGame() {
-
-}
-
-//Method    :
+//Method    :main()
 //Purpose   :
 //Parameters:
 //Returns   :
-function SaveGame() {
+function main() {
+    //initialize game variable
+    var game = new Game();
+    var PlayerBoard = document.getElementById('Player1Board');
+    var ComputerBoard = document.getElementById('Player2Board');
 
-}
+    //initialize grid Player 1
+    game.Player1Board;
 
-//Function  :
-//Purpose   :
-//Parameters:
-//Returns   :
-function SetShipLocation(numRow, numCol) {
-    return [numRow, numCol];
-}
-
-//Method    :
-//Purpose   :
-//Parameters:
-//Returns   :
-function AuthenticateUser() {
+    //initialize grid Player 2
+    game.Player2Board;
+    
 
 }
 

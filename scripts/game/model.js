@@ -31,35 +31,47 @@ var boardP2 = [
     [" 8 ", "   ", "   ", "   ", "   ", "   ", "[x]", "   ", "   ", "   ", "   "],
     [" 9 ", "   ", "   ", "   ", "   ", "   ", "   ", "   ", " x ", "   ", "   "],
     ["10 ", "   ", "   ", "   ", "   ", "   ", "   ", "   ", "   ", "   ", "   "]];
+
 //Function  :Game()
 //Purpose   :Constructor (prototype) for game object, intitializes ships and gameboard
 //Parameters:none
 //Returns   :none
 function Game() {
-    //Init Boards
-    var BoardP1 = [];
-    var BoardP2 = [];
+    
+}
 
-    //Init Ship Variables Player 1
-    var CarrierP1 = new Ship(1, "Carrier", 5, [], false);
-    var BattleshipP1 = new Ship(1, "Battleship", 4, [], false);
-    var DestroyerP1 = new Ship(1, "Destroyer", 3, [], false);
-    var SubmarineP1 = new Ship(1, "Submarine", 3, [], false);
-    var PatrolBoatP1 = new Ship(1, "Patrol Boat", 2, [], false);
+//Function  :PlayerFleet()
+//Purpose   :
+//Parameters:
+//Returns   :
+function PlayerFleet() {
+    this.placedCount = 0;
+    this.Battleship;
+    this.Carrier;
+    this.Submarine;
+    this.Destroyer;
+    this.PatrolBoat;
+    this.shipsDestroyed = 0;
+}
 
-    //Init Ship Variables Player 2
-    var CarrierP2 = new Ship(2, "Carrier", 5, [], false);
-    var BattleshipP2 = new Ship(2, "Battleship", 4, [], false);
-    var DestroyerP2 = new Ship(2, "Destroyer", 3, [], false);
-    var SubmarineP2 = new Ship(2, "Submarine", 3, [], false);
-    var PatrolBoatP2 = new Ship(2, "Patrol Boat", 2, [], false);
-}    
+//Function  :ComputerFleet()
+//Purpose   :
+//Parameters:
+//Returns   :
+function ComputerFleet() {
+    this.Battleship;
+    this.Carrier;
+    this.Submarine;
+    this.Destroyer;
+    this.PatrolBoat;
+    this.shipsDestroyed = 0;
+}
+
 //Function  :Constructor (prototype) for ship objects
 //Purpose   :Create ships for the players to interact with/set variables
 //Parameters:int playerID, string name, int health, array location, bool isVertical
 //Returns   :Ship Object
-function Ship(playerID, name, health, location, isVertical) {
-    this.playerID = playerID;
+function Ship(health, location) {
     this.name = name;
     this.health = health;
     this.location = location;
@@ -68,13 +80,45 @@ function Ship(playerID, name, health, location, isVertical) {
     this.numHits = 0;
 }
 
-//Function  :StartGame()
+//Function  :InitializeGame()
 //Purpose   :Initializes "fresh" ships and gameboards to use.
 //Parameters:none
 //Returns   :game Object
-function StartGame() {
-    var game = new Game();
-    return game;
+function InitializeGame() {
+    var board1 = CreateGrid(10, 10);
+    var board2 = CreateGrid(10, 10);
+    var playerFleet = new PlayerFleet();
+    var computerFleet = new ComputerFleet();
+
+    //Initialize player ships
+    playerFleet.Carrier = new Ship(5, []);
+    playerFleet.Battleship = new Ship(4, []);
+    playerFleet.Submarine = new Ship(3, []);
+    playerFleet.Destroyer = new Ship(3, []);
+    playerFleet.PatrolBoat = new Ship(2, []);
+
+    //Initialize computer ships
+    computerFleet.Carrier = new Ship(5, []);
+    computerFleet.Battleship = new Ship(4, []);
+    computerFleet.Submarine = new Ship(3, []);
+    computerFleet.Destroyer = new Ship(3, []);
+    computerFleet.PatrolBoat = new Ship(2, []);
+    var game = new Game()
+}
+
+//Function  :CreateGrid()  
+//Purpose   :
+//Paramaters:
+//Returns   :
+function CreateGrid(x, y) {
+    var board = new Array();
+    for (var i = 0; i < x; i++) {
+        board[i] = new Array();
+        for (var j = 0; j < y; j++) {
+            board[i][j] = '';
+        }
+    }
+    return board;
 }
 
 //Function  :GetCellContentP1()
