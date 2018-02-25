@@ -27,10 +27,10 @@ function main() {
 
 }
 
-//Function  :
-//Purpose   :
-//Parameters:
-//Returns   :
+//Function  :ThrowAlert()
+//Purpose   :Simple warning for unimplemented elements
+//Parameters:user interaction with unavailable element
+//Returns   :none
 function ThrowAlert() {
   window.alert("OPTION UNAVAILABLE!");
 }
