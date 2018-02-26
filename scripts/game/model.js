@@ -176,20 +176,4 @@ function markGridMiss(row, col, grid) {
     return grid;
 }
 
-//Function  :GetCellContentP1()
-//Purpose   :Getter function for BoardP1
-//Parameters:int numRow, int numCol
-//Returns   :boardP1[numRow][numCol]
-function GetCellContentP1(numRow, numCol) {
-    return boardP1[numRow][numCol];
-}
-
-//Function  :GetCellContentP2()
-//Purpose   :Getter function for Board2
-//Parameters:int numRow, int numCol
-//Returns   :boardP2[numRow][numCol]
-function GetCellContentP2(numRow, numCol) {
-    return boardP2[numRow][numCol];
-}
-
 
