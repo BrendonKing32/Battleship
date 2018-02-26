@@ -6,32 +6,6 @@ Version    :Version 03
 Description:Contains the functions that control game play and manage the data
 */
 
-//Board Variables for gamestate (Board variables will be stored in game object)
-var boardP1 = [
-    ["   ", " A ", " B ", " C ", " D ", " E ", " F ", " G ", " H ", " I ", " J "],
-    [" 1 ", "   ", "   ", " x ", "   ", "[ ]", "[ ]", "[ ]", "[ ]", "[ ]", "   "],
-    [" 2 ", "   ", "   ", "   ", "   ", "   ", "   ", " x ", "   ", "[ ]", "   "],
-    [" 3 ", "   ", "   ", "[ ]", "[ ]", "[ ]", "   ", "   ", "   ", "[ ]", "   "],
-    [" 4 ", "   ", "   ", "   ", "   ", " x ", "   ", " x ", "   ", "[ ]", "   "],
-    [" 5 ", " x ", "   ", "   ", "   ", "   ", "   ", "   ", "   ", "   ", " x "],
-    [" 6 ", "   ", "   ", "   ", "   ", "   ", "   ", "[ ]", "   ", "   ", "   "],
-    [" 7 ", "   ", "   ", "   ", "   ", "   ", " x ", "[x]", " x ", "   ", "   "],
-    [" 8 ", " x ", "   ", "   ", "   ", "   ", "   ", "[ ]", "   ", "   ", "   "],
-    [" 9 ", "   ", "   ", " x ", "   ", "   ", "   ", "[ ]", "   ", "   ", "   "],
-    ["10 ", "   ", "   ", "   ", "   ", " x ", "   ", "   ", "   ", "[ ]", "[ ]"]];
-var boardP2 = [
-    ["   ", " A ", " B ", " C ", " D ", " E ", " F ", " G ", " H ", " I ", " J "],
-    [" 1 ", "   ", "   ", "   ", " x ", " x ", " x ", "   ", "   ", "   ", "   "],
-    [" 2 ", "   ", "   ", "   ", "   ", "   ", "   ", "   ", "   ", " x ", "   "],
-    [" 3 ", "   ", "   ", "   ", "   ", "   ", "   ", "   ", "   ", "   ", "   "],
-    [" 4 ", "   ", "   ", "   ", "   ", " x ", "   ", " x ", "   ", "   ", "   "],
-    [" 5 ", "   ", "   ", "   ", " x ", "   ", "   ", "   ", "   ", "   ", "   "],
-    [" 6 ", "   ", "   ", " x ", "   ", " x ", " x ", "   ", "   ", "[x]", "[x]"],
-    [" 7 ", "   ", "   ", "   ", "   ", "   ", "   ", "   ", "   ", "   ", "   "],
-    [" 8 ", "   ", "   ", "   ", "   ", "   ", "[x]", "   ", "   ", "   ", "   "],
-    [" 9 ", "   ", "   ", "   ", "   ", "   ", "   ", "   ", " x ", "   ", "   "],
-    ["10 ", "   ", "   ", "   ", "   ", "   ", "   ", "   ", "   ", "   ", "   "]];
-
 //Function  :NewGame()
 //Purpose   :Constructor (prototype) for game object, intitializes ships and gameboard
 //Parameters:none
@@ -184,19 +158,19 @@ function MarkHit(ship, ships) {
 
 }
 
-//Function  :
-//Purpose   :
-//Parameters:
-//Returns   :
+//Function  :markGridHit()
+//Purpose   :mark the grid as a hit on selection
+//Parameters:int row, int col, object grid
+//Returns   :updated object grid
 function markGridHit(row, col, grid) {
     grid[col][row] = '<td class="hit"><b>HIT</b></td>';
     return grid;
 }
 
-//Function  :
-//Purpose   :
-//Parameters:
-//Returns   :
+//Function  :markGridMiss()
+//Purpose   :mark the grid as missed on selection
+//Parameters:int row, int col, object grid
+//Returns   :updated object grid
 function markGridMiss(row, col, grid) {
     grid[col][row] = '<td class="miss"><b>MISS</b></td>';
     return grid;
