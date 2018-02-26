@@ -17,8 +17,8 @@ function NewGame() {
 
 //Function  :Game()
 //Purpose   :Constructor function for Game object
-//Parameters:
-//Returns   :
+//Parameters:playerBoard Object, computerBoard Object, playerFleet Object, computerFleet Object
+//Returns   :none
 function Game(playerBoard, computerBoard, playerFleet, computerFleet) {
     this.playerBoard = playerBoard;
     this.computerBoard = computerBoard;
@@ -30,9 +30,9 @@ function Game(playerBoard, computerBoard, playerFleet, computerFleet) {
 }
 
 //Function  :PlayerFleet()
-//Purpose   :
-//Parameters:
-//Returns   :
+//Purpose   :Constructor for the player ship fleet
+//Parameters:none
+//Returns   :none
 function PlayerFleet() {
     this.placedCount = 0;
     this.Battleship;
@@ -44,9 +44,9 @@ function PlayerFleet() {
 }
 
 //Function  :ComputerFleet()
-//Purpose   :
-//Parameters:
-//Returns   :
+//Purpose   :Constructor for the computer ship fleet
+//Parameters:none
+//Returns   :none
 function ComputerFleet() {
     this.Battleship;
     this.Carrier;
@@ -94,9 +94,9 @@ function InitializeGame() {
 }
 
 //Function  :CreateBoard()  
-//Purpose   :
-//Paramaters:
-//Returns   :
+//Purpose   :create a new board object to keep track of ship and shot locations
+//Paramaters:length and width of the board
+//Returns   :array board
 function CreateBoard(x, y) {
     var board = new Array();
     for (var i = 0; i < x; i++) {
@@ -108,10 +108,10 @@ function CreateBoard(x, y) {
     return board;
 }
 
-//Function  :
-//Purpose   :
-//Parameters:
-//Returns   :
+//Function  :PlaceShip()
+//Purpose   :Place the ships into the gameboard.
+//Parameters:playerFleet Array
+//Returns   :updated PlayerFleet Array
 function PlaceShip(playerFleet) {
     var ship = document.getElementById('ship').value;
     var row = parseInt(document.getElementById('row').value - 1);
