@@ -10,8 +10,7 @@ Description:Contains the functions that serve information to the browser for the
 //Purpose   :create the game boards that the players will use
 //Parameters:int numRows, int numCOlumns, playerID
 //Returns   :table element
-function GenerateTable(numRows, numColumns, playerID) {
-    //variable declaration (GET variables from HTML document)
+function GenerateTable(numRows, numColumns) {
     var body = document.getElementsByClassName('column')[0];
     var tbl = document.createElement("table");
     var tblBody = document.createElement("tbody");
@@ -19,43 +18,19 @@ function GenerateTable(numRows, numColumns, playerID) {
         var row = document.createElement("tr");
         for (var j = 0; j < numColumns; j++) {
             if (i == 0 && j >= 1) {
-              var cell = document.createElement("td");
-              var cellText = document.createTextNode((j));
+                var cell = document.createElement("td");
+                var cellText = document.createTextNode((j));
             }
+
             else if (i >= 1 && j == 0) {
-              var cell = document.createElement("td");
-              var cellText = document.createTextNode(((i + 9).toString(36)).toUpperCase());
-              cell.setAttribute("style", "background:#616366");
+                var cell = document.createElement("td");
+                var cellText = document.createTextNode(((i + 9).toString(36)).toUpperCase());
+                cell.setAttribute("style", "background:#616366");
             }
             else {
-              var cell = document.createElement("td");
-              //parse player data into view
-              if (playerID == 1) {
-                  var content = GetCellContentP1(i, j);
-              }
-              if (playerID == 2) {
-                  var content = GetCellContentP2(i, j);
-              }
-              //highlight ship cells
-              if (content == "[ ]") {
-                console.log(" Board: " + playerID + " row: " + i + " column: " + j + " content: SHIP");
+                var cell = document.createElement("td");
+                var cellText = document.createTextNode("");
                 cell.setAttribute("style", "background:lightgray");
-              }
-              //highlight struck cells
-              else if (content == " x ") {
-                console.log(" Board: " + playerID + " row: " + i + " column: " + j + " content: MISS");
-                cell.setAttribute("style", "background:#000069");
-              }
-              //highlight struck ship cells
-              else if (content == "[x]") {
-                console.log(" Board: " + playerID + " row: " + i + " column: " + j + " content: HIT");
-                cell.setAttribute("style", "background:red");
-              }
-              //highlight all other cells
-              else {
-                cell.setAttribute("style", "background:#43A6FF");
-              }
-              var cellText = document.createTextNode("");
             }
             if (i == 0) {
                 cell.setAttribute("style", "background:#616366");

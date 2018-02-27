@@ -23,7 +23,7 @@ function main() {
     game.computerBoard = InitializeBoard(game.computerBoard);
 
     //populate computer boards
-    game.computerBoard = 
+    //game.computerBoard = 
     
 
 }
@@ -62,10 +62,10 @@ function AddShipsToBoard(ships, grid, player) {
     return grid;
 }
 
-//Function  :
-//Purpose   :
-//Parameters:
-//Returns   :
+//Function  :ConfirmShipPlacement()
+//Purpose   :confirm placement of player ships and commit them to array
+//Parameters:board, playerFleet
+//Returns   :board
 function ConfirmShipPlacement(board, playerFleet) {
     var confirmButton = document.getElementById('placement-button');
     confirmButton.onclick = function () {
