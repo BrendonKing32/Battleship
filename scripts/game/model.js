@@ -155,7 +155,19 @@ function PlaceShip(playerFleet) {
 //Parameters:
 //Returns   :
 function MarkHit(ship, ships) {
-
+    if (ships[ship].hits < ships[ship].shipSize) {
+        if (ships[ship].hits == ships[ship].shipSize - 1) {
+            ships[ship].hits++;
+            ships[ship].sunk = true;
+            ships.shipsSunk++;
+            return ships;
+        }
+        else {
+            ships[ship].hits++;
+            return ships;
+        }
+    }
+    return ships;
 }
 
 //Function  :markGridHit()
