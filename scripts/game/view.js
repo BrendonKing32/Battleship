@@ -1,7 +1,7 @@
 /*
 Name       :Brendon King
 Class      :CS 2550
-Title      :Battleship/board.js
+Title      :Battleship/view.js
 Version    :Version 03
 Description:Contains the functions that serve information to the browser for the user/requestor
 */
