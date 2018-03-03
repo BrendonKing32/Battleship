@@ -9,9 +9,9 @@ Description:Contains the functions that control user input.
 window.onload = main();
 
 //Method    :main()
-//Purpose   :
-//Parameters:
-//Returns   :
+//Purpose   :initialize the game on window load
+//Parameters:none
+//Returns   :game
 function main() {
     //initialize game variable
     var game = new Game();
@@ -28,10 +28,10 @@ function main() {
 
 }
 
-//Function  :
-//Purpose   :
-//Parameters:
-//Returns   :
+//Function  :InitializeBoard()
+//Purpose   :initialize an HTML board for the program to utilize
+//Parameters:board object
+//Returns   :board object
 function InitializeBoard(board) {
     for (var h = 0; h < board.length; h++) {
         for (var i = 0; i < board.length; i++) {
@@ -43,8 +43,8 @@ function InitializeBoard(board) {
     return board;
 }
 
-//Function  :
-//Purpose   :
+//Function  :AddShipsToBoard
+//Purpose   :manages the placement of ships on the game board
 //Parameters:
 //Returns   :
 function AddShipsToBoard(ships, grid, player) {
