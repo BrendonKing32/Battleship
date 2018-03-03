@@ -30,7 +30,7 @@ function GenerateTable(numRows, numColumns) {
             else {
                 var cell = document.createElement("td");
                 var cellText = document.createTextNode("");
-                cell.setAttribute("style", "background:lightgray");
+                cell.setAttribute("style", "background:lightblue");
             }
             if (i == 0) {
                 cell.setAttribute("style", "background:#616366");
