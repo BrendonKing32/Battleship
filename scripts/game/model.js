@@ -1,7 +1,7 @@
 /*
 Name       :Brendon King
 Class      :CS 2550
-Title      :Battleship/models.js
+Title      :Battleship/model.js
 Version    :Version 03
 Description:Contains the functions that control game play and manage the data
 */
