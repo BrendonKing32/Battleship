@@ -45,21 +45,21 @@ function InitializeBoard(board) {
 
 //Function  :AddShipsToBoard
 //Purpose   :manages the placement of ships on the game board
-//Parameters:
-//Returns   :
-function AddShipsToBoard(ships, grid, player) {
+//Parameters:ships, board, player
+//Returns   :board object
+function AddShipsToBoard(ships, board, player) {
     for (var key in ships) {
         for (var a in ships[key].shipLocation) {
             var location = ships[key].shipLocation[a];
             if (player == true) {
-                grid[location.x][location.y] = '<td class="ship" id="' + key + '"></td>';
+                board[location.x][location.y] = '<td class="ship" id="' + key + '"></td>';
             }
             else {
-                grid[location.x][location.y] = '<td class="hidden-ship" id="' + key + '"></td>';
+                board[location.x][location.y] = '<td class="hidden-ship" id="' + key + '"></td>';
             }
         }
     }
-    return grid;
+    return board;
 }
 
 //Function  :ConfirmShipPlacement()
