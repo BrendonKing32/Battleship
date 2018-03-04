@@ -21,6 +21,7 @@ body {
 }
 
 .controls {
+    text-align:justify;
     padding-left: 15px;
     padding-bottom: 15px;
     padding-right: 15px;
@@ -33,7 +34,6 @@ body {
 }
 
 button {
-    display: block;
     height: 25px;
     width: 150px;
     padding-left: 5px;

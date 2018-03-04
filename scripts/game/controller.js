@@ -21,6 +21,7 @@ function main() {
     //initialize boards
     game.playerBoard = InitializeBoard(game.playerBoard);
     game.computerBoard = InitializeBoard(game.computerBoard);
+    game.computerBoard = AddShipsToBoard(game.computerFleet, game.computerBoard, false);
 
     //handle ship placement
     game.playerBoard = ConfirmShipPlacement(game.playerBoard, game.playerFleet);
@@ -85,11 +86,11 @@ function main() {
         row = point[0];
         col = point[0];
         game.computerGuesses.push(point);
-        var cell = playerGrid.rows[row].cells[col];
+        var cell = playerBoard.rows[row].cells[col];
         if (cell.className === 'ship') {
             game.playerShips = markShipHit(cell.id, game.playerFleet);
             game.board = markBoardHit(row - 1, col - 1, game.playerBoard);
-            playerBoard.innerHTML = displayGrid(game.board);
+            playerBoard.innerHTML = displayBoard(game.board);
             if (game.playerFleet[cell.id].sunk === true) {
                 if (game.playerFleet.shipsDestroyed == 5) {
                     document.getElementById('start-game').style.visibility = 'visible';
@@ -123,7 +124,9 @@ function main() {
                         row = row + 1;
                     }
                     cell = playerBoard.rows[row].cells[col];
-                    if (cell.c)
+                    if (cell.className === 'ship') {
+
+                    }
                 }
             }
         }
@@ -147,7 +150,7 @@ function main() {
     //Function  :AddShipsToBoard
     //Purpose   :manages the placement of ships on the game board
     //Parameters:ships, board, player
-    //Returns   :grid
+    //Returns   :board
     function AddShipsToBoard(ships, board, player) {
         for (var key in ships) {
             for (var a in ships[key].shipLocation) {

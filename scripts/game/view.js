@@ -10,41 +10,25 @@ Description:Contains the functions that serve information to the browser for the
 //Purpose   :create the game boards that the players will use
 //Parameters:int numRows, int numCOlumns, playerID
 //Returns   :table element
-function GenerateTable(numRows, numColumns) {
-    var body = document.getElementsByClassName('gameboard')[0];
-    var tbl = document.createElement("table");
-    var tblBody = document.createElement("tbody");
-    for (var i = 0; i < numRows; i++) {
-        var row = document.createElement("tr");
-        for (var j = 0; j < numColumns; j++) {
-            if (i == 0 && j >= 1) {
-                var cell = document.createElement("td");
-                var cellText = document.createTextNode((j));
-            }
-
-            else if (i >= 1 && j == 0) {
-                var cell = document.createElement("td");
-                var cellText = document.createTextNode(((i + 9).toString(36)).toUpperCase());
-                cell.setAttribute("style", "background:#616366");
+function displayBoard(board) {
+    var html = '';
+    for (var i = -1; i < grid.length; i++) {
+        if (i == -1) {
+            html += '<tr><th></th>';
+        }
+        else {
+            html += '</tr><tr><th>' + (i + 1) + '</th>';
+        }
+        for (var j = 0; j < grid.length; j++) {
+            if (i == -1) {
+                html += '<th>' + String.fromCharCode(65 + j); + '</th></tr>';
             }
             else {
-                var cell = document.createElement("td");
-                var cellText = document.createTextNode("");
-                cell.setAttribute("style", "background:lightblue");
+                html += grid[j][i];
             }
-            if (i == 0) {
-                cell.setAttribute("style", "background:#616366");
-            }
-            cell.appendChild(cellText);
-            row.appendChild(cell);
-
         }
-        tblBody.appendChild(row);
     }
-    tbl.appendChild(tblBody);
-    body.appendChild(tbl);
-    tbl.setAttribute("border", "0");
-    tbl.setAttribute("align", "center");
+    return html;
 }
 
 //Function  :GenerateForm

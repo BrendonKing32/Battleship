@@ -150,10 +150,10 @@ function PlaceShip(playerFleet) {
 
 }
 
-//Function  :
-//Purpose   :
-//Parameters:
-//Returns   :
+//Function  :MarkShipHit()
+//Purpose   :update ship array with damage
+//Parameters:ship, ships
+//Returns   :ships
 function MarkShipHit(ship, ships) {
     if (ships[ship].hits < ships[ship].shipSize) {
         if (ships[ship].hits == ships[ship].shipSize - 1) {

@@ -20,6 +20,15 @@ Description:Semester project for CS 2550 at Utah Valley University.
 </head>
 <body>
     <h1 align="center">PLAY BATTLESHIP!</h1>
+    <div class="controls">
+        <h4>GAME MANAGEMENT</h4>
+        <button id="start-game">NEW GAME</button>
+        <button id="load-game" style="float:">LOAD GAME</button>
+        <button id="save-game">SAVE GAME</button>
+        <button id="ship-direction">ORIENT SHIP</button>
+        <button id="placement-button">PLACE SHIP</button>
+    </div>
+    <br />
     <table align="center">
         <tr>
             <td style="background:lightgray"><p>Ship</p></td>
@@ -28,21 +37,7 @@ Description:Semester project for CS 2550 at Utah Valley University.
         </tr>
     </table> 
     <br />
-    <div class="gameboard">
-            <script>
-                GenerateTable(11, 11);
-            </script>
-        </div>
-    <br />
-    <div class="controls">
-        <h4>CONTROLS</h4>
-        <button id="placement-button">PLACE SHIPS</button>
-        <br />
-        <button id="direction-button">CHANGE DIRECTION</button>
-        <br />
-        <button id="save-button">SAVE GAME</button>
-        <br />
-        <button id="load-button">LOAD GAME</button>
-    </div>
+    <div class="gameboard" id="playerBoard"></div>
+    <div class="gameboard" id="computerBoard"></div>
 </body>
 </html>
