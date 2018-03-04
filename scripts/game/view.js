@@ -8,23 +8,23 @@ Description:Contains the functions that serve information to the browser for the
 
 //Function  :GenerateTable
 //Purpose   :create the game boards that the players will use
-//Parameters:int numRows, int numCOlumns, playerID
+//Parameters:int numRows, int numColumns, playerID
 //Returns   :table element
 function displayBoard(board) {
     var html = '';
-    for (var i = -1; i < grid.length; i++) {
+    for (var i = -1; i < board.length; i++) {
         if (i == -1) {
             html += '<tr><th></th>';
         }
         else {
             html += '</tr><tr><th>' + (i + 1) + '</th>';
         }
-        for (var j = 0; j < grid.length; j++) {
+        for (var j = 0; j < board.length; j++) {
             if (i == -1) {
                 html += '<th>' + String.fromCharCode(65 + j); + '</th></tr>';
             }
             else {
-                html += grid[j][i];
+                html += board[j][i];
             }
         }
     }

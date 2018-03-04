@@ -15,8 +15,8 @@ window.onload = main();
 function main() {
     //initialize game variable
     var game = new Game();
-    var PlayerBoard = document.getElementById('Player1Board');
-    var ComputerBoard = document.getElementById('Player2Board');
+    var PlayerBoard = document.getElementById('playerBoard');
+    var ComputerBoard = document.getElementById('computerBoard');
 
     //initialize boards
     game.playerBoard = InitializeBoard(game.playerBoard);
@@ -37,16 +37,16 @@ function main() {
                 main();
             }
             else {
-                computerAttack();
+                ComputerAttack();
                 startGameButton.style.visibility = 'hidden';
-                playerAttack();
+                PlayerAttack();
                 document.getElementById('debug').innerHTML = 'It is your turn! Select a cell by clicking on the board';
             }
         }
         else {
             document.getElementById('debug').innerHTML = 'You must place all ships before beginning game';
         }
-    }
+    };
 
     //controller functions
 
@@ -65,16 +65,16 @@ function main() {
     function ComputerAttack() {
         document.getElementById('debug').innerHTML = 'It is your turn! Select a cell by clicking on the board!';
         if (game.playerFleet.shipsDestroyed !== 5 || game.computerFleet.shipsDestroyed !== 5) {
-            var point = generatePoint();
+            var point = GeneratePoint();
             var row = point[0];
             var col = point[1];
             var samePoint = false;
             if (comparePoints(game.computerGuesses, point)) {
                 samePoint = true;
                 do {
-                    point = generatePoint();
+                    point = GeneratePoint();
                     if (comparePoints(game.computerGuesses, point)) {
-                        point = generatePoint();
+                        point = GeneratePoint();
                     }
                     else {
                         samePoint = false;
@@ -179,6 +179,14 @@ function main() {
             return board;
         }
         return board;
+    }
+
+    //Function  :
+    //Purpose   :
+    //Parameters:
+    //Returns   :
+    function GeneratePoint() {
+
     }
 }
 

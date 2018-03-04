@@ -7,11 +7,11 @@ Description:Contains the functions that control game play and manage the data
 */
 
 //Function  :NewGame()
-//Purpose   :Constructor (prototype) for game object, intitializes ships and gameboard
+//Purpose   :Constructor (prototype) for game object, initializes ships and gameboard
 //Parameters:none
 //Returns   :none
 function NewGame() {
-    var game = initializeGame();
+    var game = InitializeGame();
     return game;
 }
 
@@ -24,7 +24,7 @@ function Game(playerBoard, computerBoard, playerFleet, computerFleet) {
     this.computerBoard = computerBoard;
     this.playerFleet = playerFleet;
     this.computerFleet = computerFleet;
-    this.computerGuesses = new Array();
+    this.computerGuesses = [];
     this.computerRow = -1;
     this.computerCol = -1;
 }
@@ -95,7 +95,7 @@ function InitializeGame() {
 
 //Function  :CreateBoard()  
 //Purpose   :create a new board object to keep track of ship and shot locations
-//Paramaters:length and width of the board
+//Parameters:length and width of the board
 //Returns   :array board
 function CreateBoard(x, y) {
     var board = new Array();
