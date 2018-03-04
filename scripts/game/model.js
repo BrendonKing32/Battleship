@@ -154,7 +154,7 @@ function PlaceShip(playerFleet) {
 //Purpose   :
 //Parameters:
 //Returns   :
-function MarkHit(ship, ships) {
+function MarkShipHit(ship, ships) {
     if (ships[ship].hits < ships[ship].shipSize) {
         if (ships[ship].hits == ships[ship].shipSize - 1) {
             ships[ship].hits++;
@@ -174,18 +174,18 @@ function MarkHit(ship, ships) {
 //Purpose   :mark the grid as a hit on selection
 //Parameters:int row, int col, object grid
 //Returns   :updated object grid
-function markGridHit(row, col, grid) {
-    grid[col][row] = '<td class="hit"><b>HIT</b></td>';
-    return grid;
+function MarkBoardHit(row, col, board) {
+    board[col][row] = '<td class="hit"><b>HIT</b></td>';
+    return board;
 }
 
 //Function  :markGridMiss()
 //Purpose   :mark the grid as missed on selection
 //Parameters:int row, int col, object grid
 //Returns   :updated object grid
-function markGridMiss(row, col, grid) {
-    grid[col][row] = '<td class="miss"><b>MISS</b></td>';
-    return grid;
+function MarkBoardMiss(row, col, board) {
+    board[col][row] = '<td class="miss"><b>MISS</b></td>';
+    return board;
 }
 
 

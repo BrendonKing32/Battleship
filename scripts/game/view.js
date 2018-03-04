@@ -11,7 +11,7 @@ Description:Contains the functions that serve information to the browser for the
 //Parameters:int numRows, int numCOlumns, playerID
 //Returns   :table element
 function GenerateTable(numRows, numColumns) {
-    var body = document.getElementsByClassName('column')[0];
+    var body = document.getElementsByClassName('gameboard')[0];
     var tbl = document.createElement("table");
     var tblBody = document.createElement("tbody");
     for (var i = 0; i < numRows; i++) {

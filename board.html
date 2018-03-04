@@ -20,51 +20,29 @@ Description:Semester project for CS 2550 at Utah Valley University.
 </head>
 <body>
     <h1 align="center">PLAY BATTLESHIP!</h1>
-    <div class ="row">
-        <div id="Player1" class ="column" align="center">
-          <h4>Your Board</h4>
-          <div id="Player1Board">
-              <script>
-                  GenerateTable(11, 11, 1);
-              </script>
-          </div>
-            <p></p>
-          <table>
-            <tr>
-              <td style="background:lightgray"><p>Ship</p></td>
-              <td style="background:#ff0000"><p>Hit</p></td>
-              <td style="background:#000069"><p style="color: white">Miss</p></td>
-            </tr>
-          </table>
-          <h4>Opponent Board</h4>
-          <div id="Player2Board">
-              <script>
-                  GenerateTable(11, 11, 2);
-              </script>
-          </div>
+    <table align="center">
+        <tr>
+            <td style="background:lightgray"><p>Ship</p></td>
+            <td style="background:#ff0000"><p>Hit</p></td>
+            <td style="background:#000069"><p style="color: white">Miss</p></td>
+        </tr>
+    </table> 
+    <br />
+    <div class="gameboard">
+            <script>
+                GenerateTable(11, 11);
+            </script>
         </div>
-        <div class ="column", id="controls">
-          <h4>CONTROLS</h4>
-          <div class="controls">
-            <h4>PLAYER LOGIN</h4>
-            <form>
-                <b>Username:</b><br>
-                <input type="text" name="userName\t"><br>
-                <b>Password:</b><br>
-                <input type="password" name="userPass\t"><br>
-                <button style="float:right" onclick="ThrowAlert()">SIGN IN</button>
-                <br>
-            </form>
-            <h4>GAME MANAGEMENT</h4>
-            <button onclick="ThrowAlert()">PLACE SHIPS</button>
-            <button onclick="ThrowAlert()">SAVE GAME</button>
-            <button onclick="ThrowAlert()">LOAD GAME</button>
-            <button onclick="ThrowAlert()">CHANGE DIRECTION</button>
-          </div>
-        </div>
-        <div class="column", id="statistics">
-
-        </div>
+    <br />
+    <div class="controls">
+        <h4>CONTROLS</h4>
+        <button id="placement-button">PLACE SHIPS</button>
+        <br />
+        <button id="direction-button">CHANGE DIRECTION</button>
+        <br />
+        <button id="save-button">SAVE GAME</button>
+        <br />
+        <button id="load-button">LOAD GAME</button>
     </div>
 </body>
 </html>
