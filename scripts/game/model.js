@@ -6,155 +6,125 @@ Version    :Version 03
 Description:Contains the functions that control game play and manage the data
 */
 
-//Function  :NewGame()
-//Purpose   :Constructor (prototype) for game object, initializes ships and gameboard
-//Parameters:none
-//Returns   :none
-function NewGame() {
-    var game = InitializeGame();
+function newGame() {
+    var game = initializeGame();
     return game;
 }
 
-//Function  :Game()
-//Purpose   :Constructor function for Game object
-//Parameters:playerBoard Object, computerBoard Object, playerFleet Object, computerFleet Object
-//Returns   :none
-function Game(playerBoard, computerBoard, playerFleet, computerFleet) {
-    this.playerBoard = playerBoard;
-    this.computerBoard = computerBoard;
-    this.playerFleet = playerFleet;
-    this.computerFleet = computerFleet;
-    this.computerGuesses = [];
+// Objects
+function Game(grid, computerGrid, playerShips, computerShips) {
+    this.grid = grid;
+    this.computerGrid = computerGrid;
+    this.playerShips = playerShips;
+    this.computerShips = computerShips;
+    this.computerGuesses = new Array();
     this.computerRow = -1;
     this.computerCol = -1;
 }
 
-//Function  :PlayerFleet()
-//Purpose   :Constructor for the player ship fleet
-//Parameters:none
-//Returns   :none
-function PlayerFleet() {
+function PlayerShips() {
     this.placedCount = 0;
-    this.Battleship;
-    this.Carrier;
-    this.Submarine;
-    this.Destroyer;
-    this.PatrolBoat;
-    this.shipsDestroyed = 0;
+    this.playerCarrier;
+    this.playerBattleship;
+    this.playerCruiser;
+    this.playerSub;
+    this.playerDestroyer;
+    this.shipsSunk = 0;
 }
 
-//Function  :ComputerFleet()
-//Purpose   :Constructor for the computer ship fleet
-//Parameters:none
-//Returns   :none
-function ComputerFleet() {
-    this.Battleship;
-    this.Carrier;
-    this.Submarine;
-    this.Destroyer;
-    this.PatrolBoat;
-    this.shipsDestroyed = 0;
+function ComputerShips() {
+    this.computerCarrier;
+    this.computerBattleship;
+    this.computerCruiser;
+    this.computerSub;
+    this.computerDestroyer;
+    this.shipsSunk = 0;
 }
 
-//Function  :Constructor (prototype) for ship objects
-//Purpose   :Create ships for the players to interact with/set variables
-//Parameters:int health, array location
-//Returns   :Ship Object
 function Ship(size, location) {
-    this.size = size;
-    this.location = location;
-    this.isDestroyed = false;
-    this.numHits = 0;
+    this.shipSize = size;
+    this.shipLocation = location;
+    this.sunk = false;
+    this.hits = 0;
 }
 
-//Function  :InitializeGame()
-//Purpose   :Initializes "fresh" ships and gameboards to use.
-//Parameters:none
-//Returns   :game Object
-function InitializeGame() {
-    var playerBoard = CreateBoard(10, 10);
-    var computerBoard = CreateBoard(10, 10);
-    var playerFleet = new PlayerFleet();
-    var computerFleet = new ComputerFleet();
+// Functions
+function initializeGame() {
+    var grid = createGridArray(10, 10);
+    var computerGrid = createGridArray(10, 10);
+    var playerShips = new PlayerShips();
+    var computerShips = new ComputerShips();
 
-    //Initialize player ships
-    playerFleet.Carrier = new Ship(5, []);
-    playerFleet.Battleship = new Ship(4, []);
-    playerFleet.Submarine = new Ship(3, []);
-    playerFleet.Destroyer = new Ship(3, []);
-    playerFleet.PatrolBoat = new Ship(2, []);
+    // Generates Player ships
+    playerShips.playerCarrier = new Ship(5, []);
+    playerShips.playerBattleship = new Ship(4, []);
+    playerShips.playerCruiser = new Ship(3, []);
+    playerShips.playerSub = new Ship(3, []);
+    playerShips.playerDestroyer = new Ship(2, []);
 
-    //Initialize computer ships
-    computerFleet.Carrier = new Ship(5, []);
-    computerFleet.Battleship = new Ship(4, []);
-    computerFleet.Submarine = new Ship(3, []);
-    computerFleet.Destroyer = new Ship(3, []);
-    computerFleet.PatrolBoat = new Ship(2, []);
-    var game = new Game(playerBoard, computerBoard, playerFleet, computerFleet);
+    // Generates Computer ships
+    computerShips.computerCarrier = new Ship(5, []);
+    computerShips.computerBattleship = new Ship(4, []);
+    computerShips.computerCruiser = new Ship(3, []);
+    computerShips.computerSub = new Ship(3, []);
+    computerShips.computerDestroyer = new Ship(2, []);
+
+    var game = new Game(grid, computerGrid, playerShips, computerShips);
+    return game;
 }
 
-//Function  :CreateBoard()  
-//Purpose   :create a new board object to keep track of ship and shot locations
-//Parameters:length and width of the board
-//Returns   :array board
-function CreateBoard(x, y) {
-    var board = new Array();
+function createGridArray(x, y) {
+    var grid = new Array();
     for (var i = 0; i < x; i++) {
-        board[i] = new Array();
+        grid[i] = new Array();
         for (var j = 0; j < y; j++) {
-            board[i][j] = '';
+            grid[i][j] = '';
         }
     }
-    return board;
+    return grid;
 }
 
-//Function  :PlaceShip()
-//Purpose   :Place the ships into the gameboard.
-//Parameters:playerFleet Array
-//Returns   :updated PlayerFleet Array
-function PlaceShip(playerFleet) {
+// Implement these functions later on to update the Model
+function placeShip(playerShips) {
+    var debug = document.getElementById('debug');
     var ship = document.getElementById('ship').value;
-    var row = parseInt(document.getElementById('row').value - 1);
-    var col = parseInt(document.getElementById('col').value - 1);
+    var row = parseInt(document.getElementById('row').value) - 1;
+    var col = parseInt(document.getElementById('col').value) - 1;
     if (col > 9 || row > 9) {
-        window.alert("INVALID LOCATION!");
+        debug.innerHTML += '<p class="error">You cannot place a ship out of bounds.</p>'
         return false;
     }
     var direction = document.getElementById('direction').value;
     var location = [];
-    if (playerFleet[ship].shipLocation.length > 0) {
-        window.alert("SHIP HAS ALREADY BEEN PLACED!");
+    if (playerShips[ship].shipLocation.length > 0) {
+        debug.innerHTML += '<p class="error">That ship has already been placed</p>'
         return false;
     }
     if (direction == 'horizontal') {
-        for (var i = 0; i < playerFleet[ship].size; i++) {
-            if (col + playerFleet[ship].size > 10) {
-                window.alert("INVALID LOCATION!");
+        for (var i = 0; i < playerShips[ship].shipSize; i++) {
+            if (col + playerShips[ship].shipSize > 10) {
+                debug.innerHTML += '<p class="error">You cannot place a ship out of bounds.</p>'
                 return false;
             }
             location.push({ 'x': col + i, 'y': row });
         }
     }
     else if (direction == 'vertical') {
-        for (var i = 0; i < playerFleet[ship].size; i++) {
-            if (row + playerFleet[ship].size > 10) {
-                window.alert("INVALID LOCATION!");
+        for (var i = 0; i < playerShips[ship].shipSize; i++) {
+            if (row + playerShips[ship].shipSize > 10) {
+                debug.innerHTML += '<p class="error">You cannot place a ship out of bounds.</p>'
                 return false;
             }
             location.push({ 'x': col, 'y': row + i });
         }
     }
-    playerFleet[ship].shipLocation = location;
-    playerFleet.placedCount++;
-    return playerFleet;
-
+    debug.innerHTML = '<p><b>Ship: </b>' + ship + '</p><p><b> Column: </b>' + (col + 1) + '</p><p><b> Row: </b>' + (row + 1) + '</p><p><b> Direction: </b>' + direction;
+    playerShips[ship].shipLocation = location;
+    playerShips.placedCount++;
+    return playerShips;
 }
 
-//Function  :MarkShipHit()
-//Purpose   :update ship array with damage
-//Parameters:ship, ships
-//Returns   :ships
-function MarkShipHit(ship, ships) {
+function markShipHit(ship, ships) {
     if (ships[ship].hits < ships[ship].shipSize) {
         if (ships[ship].hits == ships[ship].shipSize - 1) {
             ships[ship].hits++;
@@ -170,22 +140,16 @@ function MarkShipHit(ship, ships) {
     return ships;
 }
 
-//Function  :markGridHit()
-//Purpose   :mark the grid as a hit on selection
-//Parameters:int row, int col, object grid
-//Returns   :updated object grid
-function MarkBoardHit(row, col, board) {
-    board[col][row] = '<td class="hit"><b>HIT</b></td>';
-    return board;
+function markShipSunk() {
+
 }
 
-//Function  :markGridMiss()
-//Purpose   :mark the grid as missed on selection
-//Parameters:int row, int col, object grid
-//Returns   :updated object grid
-function MarkBoardMiss(row, col, board) {
-    board[col][row] = '<td class="miss"><b>MISS</b></td>';
-    return board;
+function markGridHit(row, col, grid) {
+    grid[col][row] = '<td class="hit"><b>HIT</b></td>';
+    return grid;
 }
 
-
+function markGridMiss(row, col, grid) {
+    grid[col][row] = '<td class="miss"><b>MISS</b></td>';
+    return grid;
+}
