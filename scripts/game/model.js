@@ -7,11 +7,11 @@ Description:Contains the functions that control game play and manage the data
 */
 
 //Function  :NewGame()
-//Purpose   :Constructor (prototype) for game object, intitializes ships and gameboard
+//Purpose   :Constructor (prototype) for game object, initializes ships and gameboard
 //Parameters:none
 //Returns   :none
 function NewGame() {
-    var game = initializeGame();
+    var game = InitializeGame();
     return game;
 }
 
@@ -24,7 +24,7 @@ function Game(playerBoard, computerBoard, playerFleet, computerFleet) {
     this.computerBoard = computerBoard;
     this.playerFleet = playerFleet;
     this.computerFleet = computerFleet;
-    this.computerGuesses = new Array();
+    this.computerGuesses = [];
     this.computerRow = -1;
     this.computerCol = -1;
 }
@@ -95,7 +95,7 @@ function InitializeGame() {
 
 //Function  :CreateBoard()  
 //Purpose   :create a new board object to keep track of ship and shot locations
-//Paramaters:length and width of the board
+//Parameters:length and width of the board
 //Returns   :array board
 function CreateBoard(x, y) {
     var board = new Array();
@@ -150,11 +150,11 @@ function PlaceShip(playerFleet) {
 
 }
 
-//Function  :
-//Purpose   :
-//Parameters:
-//Returns   :
-function MarkHit(ship, ships) {
+//Function  :MarkShipHit()
+//Purpose   :update ship array with damage
+//Parameters:ship, ships
+//Returns   :ships
+function MarkShipHit(ship, ships) {
     if (ships[ship].hits < ships[ship].shipSize) {
         if (ships[ship].hits == ships[ship].shipSize - 1) {
             ships[ship].hits++;
@@ -174,18 +174,18 @@ function MarkHit(ship, ships) {
 //Purpose   :mark the grid as a hit on selection
 //Parameters:int row, int col, object grid
 //Returns   :updated object grid
-function markGridHit(row, col, grid) {
-    grid[col][row] = '<td class="hit"><b>HIT</b></td>';
-    return grid;
+function MarkBoardHit(row, col, board) {
+    board[col][row] = '<td class="hit"><b>HIT</b></td>';
+    return board;
 }
 
 //Function  :markGridMiss()
 //Purpose   :mark the grid as missed on selection
 //Parameters:int row, int col, object grid
 //Returns   :updated object grid
-function markGridMiss(row, col, grid) {
-    grid[col][row] = '<td class="miss"><b>MISS</b></td>';
-    return grid;
+function MarkBoardMiss(row, col, board) {
+    board[col][row] = '<td class="miss"><b>MISS</b></td>';
+    return board;
 }
 
 
