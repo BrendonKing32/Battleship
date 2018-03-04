@@ -8,73 +8,130 @@ Description:Contains the functions that control user input.
 
 window.onload = main();
 
-//Method    :main()
-//Purpose   :initialize the game on window load
-//Parameters:none
-//Returns   :game
 function main() {
-    //initialize game variable
-    var game = new Game();
-    var PlayerBoard = document.getElementById('playerBoard');
-    var ComputerBoard = document.getElementById('computerBoard');
+    // Initialize game Model and load computer ships
+    // moveLegend();
+    // displayName();
+    var game = newGame();
+    var playerGrid = document.getElementById('playerGrid');
+    var computerGrid = document.getElementById('computerGrid');
+    game.computerShips = loadComputerConfig(game.computerShips);
 
-    //initialize boards
-    game.playerBoard = InitializeBoard(game.playerBoard);
-    game.computerBoard = InitializeBoard(game.computerBoard);
-    game.computerBoard = AddShipsToBoard(game.computerFleet, game.computerBoard, false);
+    // Initialize player grid
+    game.grid = initializeGrid(game.grid);
+    playerBoard.innerHTML = displayBoard(game.grid);
 
-    //handle ship placement
-    game.playerBoard = ConfirmShipPlacement(game.playerBoard, game.playerFleet);
+    // Initialize computer grid
+    game.computerGrid = initializeGrid(game.computerGrid);
+    game.computerGrid = addShipsToGrid(game.computerShips, game.computerGrid, false);
+    computerBoard.innerHTML = displayBoard(game.computerGrid);
 
-    // TODO: implement save functionality
+    // Handle the placement of the player's ships on the player grid
+    game.grid = handleShipPlacement(game.grid, game.playerShips);
 
-    //handle turns
+    // Save and Load game data
+    var loadGameButton = document.getElementById('load-game');
+    loadGameButton.onclick = function () {
+        var saveGame = loadSaveGame();
+        game.grid = addShipsToGrid(saveGame.playerShips, game.grid, true);
+        game.playerShips = saveGame.playerShips;
+        playerGrid.innerHTML = displayGrid(game.grid);
+    }
+    var saveGameButton = document.getElementById('save-game');
+    saveGameButton.onclick = function () {
+        saveGame(game);
+        return false;
+    }
+    var clearStorage = document.getElementById('clear-storage');
+    clearStorage.onclick = function () {
+        clearLocalStorage();
+        return false;
+    }
+
+    // Handle game play and turns
     var startGameButton = document.getElementById('start-game');
     startGameButton.onclick = function () {
-        if (game.playerFleet.placedCount == 5) {
-            if (game.computerFleet.shipsDestroyed === 5 || game.playerFleet.shipsDestroyed === 5) {
-                window.alert("START GAME!");
+        if (game.playerShips.placedCount == 5) {
+            if (game.computerShips.shipsSunk === 5 || game.playerShips.shipsSunk === 5) {
+                startGameButton.innerHTML = 'Start Game';
                 main();
             }
             else {
-                ComputerAttack();
+                computerAttack();
                 startGameButton.style.visibility = 'hidden';
-                PlayerAttack();
-                document.getElementById('debug').innerHTML = 'It is your turn! Select a cell by clicking on the board';
+                playerAttack();
+                document.getElementById('debug').innerHTML = 'It is now your turn. Make a guess by clicking in the Computer Grid';
             }
         }
         else {
-            document.getElementById('debug').innerHTML = 'You must place all ships before beginning game';
+            document.getElementById('debug').innerHTML = 'You must place all your ships before you can play.';
         }
-    };
-
-    //controller functions
-
-    //Function  :PlayerAttack()
-    //Purpose   :
-    //Parameters:
-    //Returns   :
-    function PlayerAttack() {
-
     }
 
-    //Function  :ComputerAttack()
-    //Purpose   :
-    //Parameters:
-    //Returns   :
-    function ComputerAttack() {
-        document.getElementById('debug').innerHTML = 'It is your turn! Select a cell by clicking on the board!';
-        if (game.playerFleet.shipsDestroyed !== 5 || game.computerFleet.shipsDestroyed !== 5) {
-            var point = GeneratePoint();
+    // Controller functions
+    function playerAttack() {
+        document.getElementById('debug').innerHTML = '';
+        if (game.computerShips.shipsSunk !== 5) {
+            var cells = document.getElementsByTagName('td');
+            for (var i = 0; i < cells.length; i++) {
+                cells[i].onclick = function () {
+                    document.getElementById('debug').innerHTML = '';
+                    var message = document.getElementById('message');
+                    var newMessage = '<br>';
+                    var col = this.cellIndex;
+                    var row = this.parentNode.rowIndex;
+                    var cell = computerGrid.rows[row].cells[col];
+                    if (cell.className === 'hidden-ship') {
+                        newMessage = String.fromCharCode(65 + (col - 1)) + ' ' + row + ' was a ' + 'hit!';
+                        game.computerShips = markShipHit(cell.id, game.computerShips);
+                        game.computerGrid = markGridHit(row - 1, col - 1, game.computerGrid);
+                        computerGrid.innerHTML = displayGrid(game.computerGrid);
+                        if (game.computerShips[cell.id].sunk === true) {
+                            if (game.computerShips.shipsSunk === 5) {
+                                newMessage = 'You win!!';
+                                document.getElementById('start-game').style.visibility = 'visible';
+                                document.getElementById('start-game').innerHTML = 'New Game';
+                                playerAttack();
+                            }
+                            else {
+                                newMessage = cell.id + ' was sunk!';
+                            }
+                        }
+                    }
+                    else {
+                        if (cell.className !== 'hit') {
+                            newMessage = String.fromCharCode(65 + (col - 1)) + ' ' + row + ' was a ' + 'miss!';
+                            game.computerGrid = markGridMiss(row - 1, col - 1, game.computerGrid);
+                            computerGrid.innerHTML = displayGrid(game.computerGrid);
+                        }
+                    }
+                    message.innerHTML = newMessage;
+
+                    setTimeout(computerAttack, 1000);
+                    playerAttack();
+                }
+            }
+        }
+        else {
+            newMessage = 'You win!!';
+            document.getElementById('start-game').style.visibility = 'visible';
+            document.getElementById('start-game').innerHTML = 'New Game';
+        }
+    }
+
+    function computerAttack() {
+        document.getElementById('debug').innerHTML = 'It is now your turn. Make a guess by clicking in the Computer Grid';
+        if (game.playerShips.shipsSunk !== 5) {
+            var point = generatePoint();
             var row = point[0];
             var col = point[1];
             var samePoint = false;
             if (comparePoints(game.computerGuesses, point)) {
                 samePoint = true;
                 do {
-                    point = GeneratePoint();
+                    point = generatePoint();
                     if (comparePoints(game.computerGuesses, point)) {
-                        point = GeneratePoint();
+                        point = generatePoint();
                     }
                     else {
                         samePoint = false;
@@ -82,38 +139,34 @@ function main() {
                 }
                 while (samePoint);
             }
-        }
-        row = point[0];
-        col = point[0];
-        game.computerGuesses.push(point);
-        var cell = playerBoard.rows[row].cells[col];
-        if (cell.className === 'ship') {
-            game.playerShips = markShipHit(cell.id, game.playerFleet);
-            game.board = markBoardHit(row - 1, col - 1, game.playerBoard);
-            playerBoard.innerHTML = displayBoard(game.board);
-            if (game.playerFleet[cell.id].sunk === true) {
-                if (game.playerFleet.shipsDestroyed == 5) {
-                    document.getElementById('start-game').style.visibility = 'visible';
-                    document.getElementById('start-game').innerHTML = 'New Game';
-                    window.alert("The computer won!");
-                }
-            }
-            var origRow = row;
-            row++;
-            if (row > 9) {
-                row--;
-            }
-            cell = playerBoard.rows[row].cells[col];
+            row = point[0];
+            col = point[1];
+            game.computerGuesses.push(point);
+            var cell = playerGrid.rows[row].cells[col];
+            var message = document.getElementById('message');
+            var newMessage = '<br>';
             if (cell.className === 'ship') {
-                game.computerRow = row;
-                game.computerCol = col;
-            }
-            else {
-                row--;
-                if (row < 0) {
-                    row++;
+                newMessage = 'The computer hit ' + cell.id;
+                game.playerShips = markShipHit(cell.id, game.playerShips);
+                game.grid = markGridHit(row - 1, col - 1, game.grid);
+                playerGrid.innerHTML = displayGrid(game.grid);
+                if (game.playerShips[cell.id].sunk === true) {
+                    if (game.playerShips.shipsSunk == 5) {
+                        document.getElementById('start-game').style.visibility = 'visible';
+                        document.getElementById('start-game').innerHTML = 'New Game';
+                        newMessage = 'The computer wins...';
+                    }
+                    else {
+                        newMessage = cell.id + ' was sunk!';
+                    }
                 }
-                cell = playerBoard.rows[row].cells[col];
+                // Make the next guess adjacent or close to the previous guess if it's a hit
+                var origRow = row;
+                row++;
+                if (row > 9) {
+                    row--;
+                }
+                cell = playerGrid.rows[row].cells[col];
                 if (cell.className === 'ship') {
                     game.computerRow = row;
                     game.computerCol = col;
@@ -121,79 +174,185 @@ function main() {
                 else {
                     row--;
                     if (row < 0) {
-                        row = row + 1;
+                        row++;
                     }
-                    cell = playerBoard.rows[row].cells[col];
+                    cell = playerGrid.rows[row].cells[col];
                     if (cell.className === 'ship') {
-
+                        game.computerRow = row;
+                        game.computerCol = col;
+                    }
+                    else {
+                        row--;
+                        if (row < 0) {
+                            row = row + 1;
+                        }
+                        cell = playerGrid.rows[row].cells[col];
+                        if (cell.className === 'ship') {
+                            game.computerRow = row;
+                            game.computerCol = col;
+                        }
+                        else {
+                            row = origRow;
+                            col++;
+                            if (col > 9) {
+                                col = col - 1;
+                            }
+                            cell = playerGrid.rows[row].cells[col];
+                            if (cell.className === 'ship') {
+                                game.computerRow = row;
+                                game.computerCol = col;
+                            }
+                            else {
+                                col = col - 1;
+                                if (col < 0) {
+                                    col = col + 1;
+                                }
+                                cell = playerGrid.rows[row].cells[col];
+                                if (cell.className === 'ship') {
+                                    game.computerRow = row;
+                                    game.computerCol = col;
+                                }
+                                else {
+                                    col--;
+                                    if (col < 0) {
+                                        col = col + 1;
+                                    }
+                                    cell = playerGrid.rows[row].cells[col];
+                                    if (cell.className === 'ship') {
+                                        game.computerRow = row;
+                                        game.computerCol = col;
+                                    }
+                                }
+                            }
+                        }
                     }
                 }
             }
+            else {
+                if (cell.className !== 'hit') {
+                    newMessage = 'The computer missed!';
+                    game.grid = markGridMiss(row - 1, col - 1, game.grid);
+                    playerGrid.innerHTML = displayGrid(game.grid);
+                }
+            }
+            message.innerHTML = newMessage;
+        }
+        else {
+            document.getElementById('start-game').style.visibility = 'visible';
+            document.getElementById('message').innerHTML = 'The computer wins...';
+            document.getElementById('start-game').innerHTML = 'New Game';
         }
     }
 
-    //Function  :InitializeBoard()
-    //Purpose   :initialize an HTML board for the program to utilize
-    //Parameters:board
-    //Returns   :board
-    function InitializeBoard(board) {
-        for (var h = 0; h < board.length; h++) {
-            for (var i = 0; i < board.length; i++) {
-                for (var j = 0; i < board.length; i++) {
-                    board[i][h] = '<td></td>';
+    function generatePoint() {
+        var row = Math.floor((Math.random() * 10) + 1);
+        var col = Math.floor((Math.random() * 10) + 1);
+        if (game.computerRow > -1) {
+            row = game.computerRow;
+            game.computerRow = -1;
+        }
+        if (game.computerCol > -1) {
+            col = game.computerCol;
+            game.computerCol = -1;
+        }
+        var point = [row, col];
+        return point;
+    }
+
+    function loadJSON(filename) {
+    }
+
+    function loadComputerConfig(computerShips) {
+    }
+
+    function initializeGrid(grid) {
+        for (var h = 0; h < grid.length; h++) {
+            for (var i = 0; i < grid.length; i++) {
+                for (var j = 0; i < grid.length; i++) {
+                    grid[i][h] = '<td></td>';
                 }
             }
         }
-        return board;
+        return grid;
     }
 
-    //Function  :AddShipsToBoard
-    //Purpose   :manages the placement of ships on the game board
-    //Parameters:ships, board, player
-    //Returns   :board
-    function AddShipsToBoard(ships, board, player) {
+    function addShipsToGrid(ships, grid, player) {
         for (var key in ships) {
             for (var a in ships[key].shipLocation) {
                 var location = ships[key].shipLocation[a];
                 if (player == true) {
-                    board[location.x][location.y] = '<td class="ship" id="' + key + '"></td>';
+                    grid[location.x][location.y] = '<td class="ship" id="' + key + '"></td>';
                 }
                 else {
-                    board[location.x][location.y] = '<td class="hidden-ship" id="' + key + '"></td>';
+                    grid[location.x][location.y] = '<td class="hidden-ship" id="' + key + '"></td>';
                 }
             }
         }
-        return board;
+        return grid;
     }
 
-    //Function  :ConfirmShipPlacement()
-    //Purpose   :confirm placement of player ships and commit them to array
-    //Parameters:board, playerFleet
-    //Returns   :board
-    function ConfirmShipPlacement(board, playerFleet) {
-        var confirmButton = document.getElementById('placement-button');
-        confirmButton.onclick = function () {
-            var updatedShips = placeShip(playerFleet);
-            board = AddShipsToBoard(updatedShips, board, true);
-            playerBoard.innerHTML = displayBoard(board);
-            return board;
+    function handleShipPlacement(grid, playerShips) {
+        var placeButton = document.getElementById('place-button');
+        placeButton.onclick = function () {
+            var updatedShips = placeShip(playerShips);
+            grid = addShipsToGrid(updatedShips, grid, true);
+            playerGrid.innerHTML = displayGrid(grid);
+            return grid;
         }
-        return board;
+        return grid;
     }
 
-    //Function  :
-    //Purpose   :
-    //Parameters:
-    //Returns   :
-    function GeneratePoint() {
-
+    function handleLogin() {
+        var loginButton = document.getElementById('login-button');
+        var ajax = new XMLHttpRequest();
+        var username = document.getElementById('username').value;
+        var password = document.getElementById('password').value
+        var data = 'userName=' + username + '&password=' + password;
+        ajax.onreadystatechange = function () {
+            if (ajax.readyState == 4) {
+                var response = JSON.parse(ajax.responseText);
+                if (response.result == 'valid') {
+                    var timestamp = 'User: ' + username + ' ' + response.timestamp;
+                    localStorage.setItem('cs2550timestamp', timestamp);
+                    window.location = 'grid.html';
+                }
+                else {
+                    document.getElementById('home-message').innerHTML = '<h3>Invalid Login Credentials</h3>';
+                }
+            }
+        }
+        ajax.open('POST', 'http://universe.tc.uvu.edu/cs2550/assignments/PasswordCheck/check.php', true);
+        ajax.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+        ajax.send(data);
     }
-}
 
-//Function  :ThrowAlert()
-//Purpose   :Simple warning for unimplemented elements
-//Parameters:user interaction with unavailable element
-//Returns   :none
-function ThrowAlert() {
-    window.alert("OPTION UNAVAILABLE!");
+    function saveGame(game) {
+        var message = document.getElementById('debug').innerHTML = 'Your game was successfully saved!';
+        var gameData = JSON.stringify(game);
+        localStorage.setItem('save-game', gameData);
+    }
+
+    function loadSaveGame() {
+        var message = document.getElementById('debug').innerHTML = 'Your game was successfully loaded!';
+        var saveGame = localStorage.getItem('save-game');
+        return JSON.parse(saveGame);
+    }
+
+    function clearLocalStorage() {
+        var message = document.getElementById('debug').innerHTML = 'Your save game data was successfully cleared!';
+        localStorage.removeItem('save-game');
+        main();
+    }
+
+    function comparePoints(computerGuesses, point) {
+        if (computerGuesses.length == 0) {
+            return false;
+        }
+        for (var i = 0; i < computerGuesses.length; i++) {
+            if (computerGuesses[i][0] === point[0] && computerGuesses[i][1] === point[1]) {
+                return true;
+            }
+        }
+        return false;
+    }
 }

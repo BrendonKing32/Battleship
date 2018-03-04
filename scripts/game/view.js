@@ -14,17 +14,18 @@ function displayBoard(board) {
     var html = '';
     for (var i = -1; i < board.length; i++) {
         if (i == -1) {
-            html += '<tr><th></th>';
+            html += '<tr style="background:gray"><th></th>';
         }
-        else {
-            html += '</tr><tr><th>' + (i + 1) + '</th>';
+        else { 
+            html += '</tr><tr><th style="background:grey">' + (i + 1) + '</th>';
         }
         for (var j = 0; j < board.length; j++) {
             if (i == -1) {
-                html += '<th>' + String.fromCharCode(65 + j); + '</th></tr>';
+                html += '<th style="background:grey">' + String.fromCharCode(65 + j); + '</th></tr>';
+                
             }
             else {
-                html += board[j][i];
+                html += '<th style="background:lightblue">';
             }
         }
     }

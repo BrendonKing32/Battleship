@@ -14,9 +14,6 @@ Description:Semester project for CS 2550 at Utah Valley University.
     <link rel="icon" href="media/images/battleship-icon.png">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" type="text/css" media="screen" href="styles/main.css" />
-    <script src="scripts/game/view.js"></script>
-    <script src="scripts/game/model.js"></script>
-    <script src="scripts/game/controller.js"></script>
 </head>
 <body>
     <h1 align="center">PLAY BATTLESHIP!</h1>
@@ -29,15 +26,34 @@ Description:Semester project for CS 2550 at Utah Valley University.
         <button id="placement-button">PLACE SHIP</button>
     </div>
     <br />
-    <table align="center">
-        <tr>
-            <td style="background:lightgray"><p>Ship</p></td>
-            <td style="background:#ff0000"><p>Hit</p></td>
-            <td style="background:#000069"><p style="color: white">Miss</p></td>
-        </tr>
-    </table> 
-    <br />
-    <div class="gameboard" id="playerBoard"></div>
-    <div class="gameboard" id="computerBoard"></div>
+    <div class="row">
+        <div class="grid">
+            <h4>PLAYER BOARD</h4>
+            <table id="playerBoard" align="center"></table>
+            <br />
+            <table align="center">
+                <tr>
+                    <td style="background:lightgray"><p>Ship</p></td>
+                    <td style="background:#ff0000"><p>Hit</p></td>
+                    <td style="background:#000069"><p style="color: white">Miss</p></td>
+                </tr>
+            </table>
+        </div>
+        <div class="grid">
+            <h4>COMPUTER BOARD</h4>
+            <table id="computerBoard" align="center"></table>
+            <br />
+            <table align="center">
+                <tr>
+                    <td style="background:lightgray"><p>Ship</p></td>
+                    <td style="background:#ff0000"><p>Hit</p></td>
+                    <td style="background:#000069"><p style="color: white">Miss</p></td>
+                </tr>
+            </table>
+        </div>
+    </div>
+    <script src="scripts/game/view.js"></script>
+    <script src="scripts/game/model.js"></script>
+    <script src="scripts/game/controller.js"></script>
 </body>
 </html>
