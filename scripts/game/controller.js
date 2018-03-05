@@ -8,10 +8,10 @@ Description:Contains the functions that control user input.
 
 window.onload = main();
 
-//Function  :
-//Purpose   :
-//Parameters:
-//Returns   :
+//Function  :main
+//Purpose   :main constructor method for battleship
+//Parameters:none
+//Returns   :none
 function main() {
     displayName();
     // Initialize game Model and load computer ships
@@ -54,10 +54,10 @@ function main() {
 
     // Controller functions
 
-    //Function  :
-    //Purpose   :
-    //Parameters:
-    //Returns   :
+    //Function  :playerAttack()
+    //Purpose   :handle player interaction with enemy board, update ships, and manage turns
+    //Parameters:none
+    //Returns   :updated grid and ship objects
     function playerAttack() {
         if (game.computerFleet.shipsSunk !== 5) {
             var cells = document.getElementsByTagName('td');
@@ -106,10 +106,10 @@ function main() {
         }
     }
 
-    //Function  :
-    //Purpose   :
-    //Parameters:
-    //Returns   :
+    //Function  :computerAttack()
+    //Purpose   :manage computer turns, update ship damage, and return updated grid values
+    //Parameters:none
+    //Returns   :updated grid
     function computerAttack() {
         if (game.playerFleet.shipsSunk !== 5) {
             var point = generatePoint();
@@ -234,10 +234,10 @@ function main() {
         }
     }
 
-    //Function  :
-    //Purpose   :
-    //Parameters:
-    //Returns   :
+    //Function  :generatePoint()
+    //Purpose   :simple method used by AI to select cell to attack
+    //Parameters:none
+    //Returns   :point object
     function generatePoint() {
         var row = Math.floor((Math.random() * 10) + 1);
         var col = Math.floor((Math.random() * 10) + 1);
@@ -253,10 +253,10 @@ function main() {
         return point;
     }
 
-    //Function  :
-    //Purpose   :
-    //Parameters:
-    //Returns   :
+    //Function  :initializeGrid()
+    //Purpose   :initialize player boards for further interaction using data from model
+    //Parameters:grid data from model.js
+    //Returns   :grid object
     function initializeGrid(grid) {
         for (var h = 0; h < grid.length; h++) {
             for (var i = 0; i < grid.length; i++) {
@@ -268,10 +268,10 @@ function main() {
         return grid;
     }
 
-    //Function  :
-    //Purpose   :
-    //Parameters:
-    //Returns   :
+    //Function  :addShipsToGrid(ships, grid, player)
+    //Purpose   :manage the updating of the computer fleet from congiguration files
+    //Parameters:ship arrays, grid objects, player values
+    //Returns   :updated computer grid
     function addShipsToGrid(ships, grid, player) {
         for (var key in ships) {
             for (var a in ships[key].shipLocation) {
@@ -287,10 +287,10 @@ function main() {
         return grid;
     }
 
-    //Function  :
-    //Purpose   :
-    //Parameters:
-    //Returns   :
+    //Function  :handleShipPlacement()
+    //Purpose   :event handler for ship placement
+    //Parameters:grid, array playerFleet
+    //Returns   :updated player grid
     function handleShipPlacement(grid, playerFleet) {
         var placementButton = document.getElementById('placement-button');
         placementButton.onclick = function () {
@@ -302,10 +302,10 @@ function main() {
         return grid;
     }
 
-    //Function  :
-    //Purpose   :
-    //Parameters:
-    //Returns   :
+    //Function  :comparePoints()
+    //Purpose   :function utilized by the computer when attacking to determine status of nearby cells (whether they've been hits, misses, selected)
+    //Parameters:computerGuesses array, point object from generatePoint()
+    //Returns   :boolean value (true if good, false if bad)
     function comparePoints(computerGuesses, point) {
         if (computerGuesses.length == 0) {
             return false;
@@ -318,10 +318,10 @@ function main() {
         return false;
     }
 
-    //Function  :
-    //Purpose   :
-    //Parameters:
-    //Returns   :
+    //Function  :returnCellContent()
+    //Purpose   :simple method demonstrating onclick handlers while the main codebase remains inaccessible
+    //Parameters:none
+    //Returns   :event
     function returnCellContent() {
         var cells = document.getElementsByTagName('td');
 
