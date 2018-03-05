@@ -6,17 +6,21 @@ Version    :Version 03
 Description:Contains the functions that control game play and manage the data
 */
 
+//Function  :
+//Purpose   :
+//Parameters:
+//Returns   :
 function newGame() {
     var game = initializeGame();
     return game;
 }
 
 // Objects
-function Game(grid, computerGrid, playerFleet, computerShips) {
+function Game(grid, computerGrid, playerFleet, computerFleet) {
     this.grid = grid;
     this.computerGrid = computerGrid;
     this.playerFleet = playerFleet;
-    this.computerShips = computerShips;
+    this.computerFleet = computerFleet;
     this.computerGuesses = new Array();
     this.computerRow = -1;
     this.computerCol = -1;
@@ -53,7 +57,7 @@ function initializeGame() {
     var grid = createGridArray(10, 10);
     var computerGrid = createGridArray(10, 10);
     var playerFleet = new PlayerFleet();
-    var computerShips = new ComputerShips();
+    var computerFleet = new ComputerShips();
 
     // Generates Player ships
     playerFleet.playerCarrier = new Ship(5, []);
@@ -63,13 +67,13 @@ function initializeGame() {
     playerFleet.playerDestroyer = new Ship(2, []);
 
     // Generates Computer ships
-    computerShips.computerCarrier = new Ship(5, []);
-    computerShips.computerBattleship = new Ship(4, []);
-    computerShips.computerCruiser = new Ship(3, []);
-    computerShips.computerSub = new Ship(3, []);
-    computerShips.computerDestroyer = new Ship(2, []);
+    computerFleet.computerCarrier = new Ship(5, []);
+    computerFleet.computerBattleship = new Ship(4, []);
+    computerFleet.computerCruiser = new Ship(3, []);
+    computerFleet.computerSub = new Ship(3, []);
+    computerFleet.computerDestroyer = new Ship(2, []);
 
-    var game = new Game(grid, computerGrid, playerFleet, computerShips);
+    var game = new Game(grid, computerGrid, playerFleet, computerFleet);
     return game;
 }
 
@@ -136,10 +140,6 @@ function markShipHit(ship, ships) {
         }
     }
     return ships;
-}
-
-function markShipSunk() {
-
 }
 
 function markGridHit(row, col, grid) {

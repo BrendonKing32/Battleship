@@ -9,7 +9,7 @@ Description:Contains the functions that serve information to the browser for the
 //Function  :displayBoard
 //Purpose   :create the game boards that the players will use
 //Parameters:int numRows, int numColumns, playerID
-//Returns   :table element
+//Returns   :html <td> elements
 function displayBoard(board) {
     var html = '';
     for (var i = -1; i < board.length; i++) {
@@ -30,4 +30,15 @@ function displayBoard(board) {
         }
     }
     return html;
+}
+//Function  :
+//Purpose   :
+//Parameters:
+//Returns   :
+function displayName() {
+    var playerName = document.getElementById('player-name');
+    var nameInput = document.getElementById('name-input');
+    nameInput.oninput = function () {
+        playerName.innerHTML = 'Name: ' + this.value;
+    }
 }

@@ -8,12 +8,16 @@ Description:Contains the functions that control user input.
 
 window.onload = main();
 
+//Function  :
+//Purpose   :
+//Parameters:
+//Returns   :
 function main() {
     // Initialize game Model and load computer ships
     var game = newGame();
     var playerGrid = document.getElementById('playerGrid');
     var computerGrid = document.getElementById('computerGrid');
-    game.computerShips = loadComputerConfig(game.computerShips);
+    //game.computerFleet = loadComputerConfig(game.computerFleet);
 
     // Initialize player grid
     game.grid = initializeGrid(game.grid);
@@ -21,33 +25,19 @@ function main() {
 
     // Initialize computer grid
     game.computerGrid = initializeGrid(game.computerGrid);
-    game.computerGrid = addShipsToGrid(game.computerShips, game.computerGrid, false);
+    game.computerGrid = addShipsToGrid(game.computerFleet, game.computerGrid, false);
     computerBoard.innerHTML = displayBoard(game.computerGrid);
 
     // Handle the placement of the player's ships on the player grid
     game.grid = handleShipPlacement(game.grid, game.playerFleet);
 
     // Save and Load game data
-    var loadGameButton = document.getElementById('load-game');
-    loadGameButton.onclick = function () {
-        var saveGame = loadSaveGame();
-        game.grid = addShipsToGrid(saveGame.playerFleet, game.grid, true);
-        game.playerFleet = saveGame.playerFleet;
-        playerGrid.innerHTML = displayGrid(game.grid);
-    }
-    var saveGameButton = document.getElementById('save-game');
-    saveGameButton.onclick = function () {
-        saveGame(game);
-        return false;
-    }
-    var clearStorage = document.getElementById('clear-storage');
-    }
 
     // Handle game play and turns
     var startGameButton = document.getElementById('start-game');
     startGameButton.onclick = function () {
         if (game.playerFleet.placedCount == 5) {
-            if (game.computerShips.shipsSunk === 5 || game.playerFleet.shipsSunk === 5) {
+            if (game.computerFleet.shipsSunk === 5 || game.playerFleet.shipsSunk === 5) {
                 startGameButton.innerHTML = 'Start Game';
                 main();
             }
@@ -62,8 +52,13 @@ function main() {
     }
 
     // Controller functions
+
+    //Function  :
+    //Purpose   :
+    //Parameters:
+    //Returns   :
     function playerAttack() {
-        if (game.computerShips.shipsSunk !== 5) {
+        if (game.computerFleet.shipsSunk !== 5) {
             var cells = document.getElementsByTagName('td');
             for (var i = 0; i < cells.length; i++) {
                 cells[i].onclick = function () {
@@ -74,11 +69,11 @@ function main() {
                     var cell = computerGrid.rows[row].cells[col];
                     if (cell.className === 'hidden-ship') {
                         newMessage = String.fromCharCode(65 + (col - 1)) + ' ' + row + ' was a ' + 'hit!';
-                        game.computerShips = markShipHit(cell.id, game.computerShips);
+                        game.computerFleet = markShipHit(cell.id, game.computerFleet);
                         game.computerGrid = markGridHit(row - 1, col - 1, game.computerGrid);
                         computerGrid.innerHTML = displayGrid(game.computerGrid);
-                        if (game.computerShips[cell.id].sunk === true) {
-                            if (game.computerShips.shipsSunk === 5) {
+                        if (game.computerFleet[cell.id].sunk === true) {
+                            if (game.computerFleet.shipsSunk === 5) {
                                 newMessage = 'You win!!';
                                 document.getElementById('start-game').style.visibility = 'visible';
                                 document.getElementById('start-game').innerHTML = 'New Game';
@@ -110,6 +105,10 @@ function main() {
         }
     }
 
+    //Function  :
+    //Purpose   :
+    //Parameters:
+    //Returns   :
     function computerAttack() {
         if (game.playerFleet.shipsSunk !== 5) {
             var point = generatePoint();
@@ -234,6 +233,10 @@ function main() {
         }
     }
 
+    //Function  :
+    //Purpose   :
+    //Parameters:
+    //Returns   :
     function generatePoint() {
         var row = Math.floor((Math.random() * 10) + 1);
         var col = Math.floor((Math.random() * 10) + 1);
@@ -249,12 +252,10 @@ function main() {
         return point;
     }
 
-    function loadJSON(filename) {
-    }
-
-    function loadComputerConfig(computerShips) {
-    }
-
+    //Function  :
+    //Purpose   :
+    //Parameters:
+    //Returns   :
     function initializeGrid(grid) {
         for (var h = 0; h < grid.length; h++) {
             for (var i = 0; i < grid.length; i++) {
@@ -266,6 +267,10 @@ function main() {
         return grid;
     }
 
+    //Function  :
+    //Purpose   :
+    //Parameters:
+    //Returns   :
     function addShipsToGrid(ships, grid, player) {
         for (var key in ships) {
             for (var a in ships[key].shipLocation) {
@@ -281,6 +286,10 @@ function main() {
         return grid;
     }
 
+    //Function  :
+    //Purpose   :
+    //Parameters:
+    //Returns   :
     function handleShipPlacement(grid, playerFleet) {
         var placementButton = document.getElementById('placement-button');
         placementButton.onclick = function () {
@@ -292,24 +301,10 @@ function main() {
         return grid;
     }
 
-    function handleLogin() {
-    }
-
-    function saveGame(game) {
-        var gameData = JSON.stringify(game);
-        localStorage.setItem('save-game', gameData);
-    }
-
-    function loadSaveGame() {
-        var saveGame = localStorage.getItem('save-game');
-        return JSON.parse(saveGame);
-    }
-
-    function clearLocalStorage() {
-        localStorage.removeItem('save-game');
-        main();
-    }
-
+    //Function  :
+    //Purpose   :
+    //Parameters:
+    //Returns   :
     function comparePoints(computerGuesses, point) {
         if (computerGuesses.length == 0) {
             return false;
@@ -321,3 +316,20 @@ function main() {
         }
         return false;
     }
+
+    //Function  :
+    //Purpose   :
+    //Parameters:
+    //Returns   :
+    function returnCellContent() {
+        var cells = document.getElementsByTagName('td');
+
+        for (var i = 0; i < cells.length; i++) {
+
+            var cell = cells[i];
+
+            cells[i].onclick = markGridMiss;
+        }
+    }
+}
+
