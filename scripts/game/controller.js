@@ -13,6 +13,7 @@ window.onload = main();
 //Parameters:
 //Returns   :
 function main() {
+    displayName();
     // Initialize game Model and load computer ships
     var game = newGame();
     var playerGrid = document.getElementById('playerGrid');
@@ -325,11 +326,16 @@ function main() {
         var cells = document.getElementsByTagName('td');
 
         for (var i = 0; i < cells.length; i++) {
-
-            var cell = cells[i];
-
             cells[i].onclick = markGridMiss;
         }
+    }
+
+    //Function  :
+    //Purpose   :
+    //Parameters:
+    //Returns   :
+    function updateCellContent() {
+
     }
 }
 

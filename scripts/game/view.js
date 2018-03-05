@@ -6,7 +6,7 @@ Version    :Version 03
 Description:Contains the functions that serve information to the browser for the user/requestor
 */
 
-//Function  :displayBoard
+//Function  :displayBoard()
 //Purpose   :create the game boards that the players will use
 //Parameters:int numRows, int numColumns, playerID
 //Returns   :html <td> elements
@@ -31,10 +31,10 @@ function displayBoard(board) {
     }
     return html;
 }
-//Function  :
-//Purpose   :
-//Parameters:
-//Returns   :
+//Function  :displayName()
+//Purpose   :update board.html with player name
+//Parameters:user input
+//Returns   :updated header
 function displayName() {
     var playerName = document.getElementById('player-name');
     var nameInput = document.getElementById('name-input');
