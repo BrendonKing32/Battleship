@@ -13,7 +13,6 @@ window.onload = main();
 //Parameters:none
 //Returns   :none
 function main() {
-    displayName();
     // Initialize game Model and load computer ships
     var game = newGame();
     var playerGrid = document.getElementById('playerGrid');
@@ -48,11 +47,27 @@ function main() {
                 playerAttack();
             }
         }
-        else {
-        }
+        var cells = playerGrid.getElementByTagName('td');
+        cells.onclick = returnCellLocation();
     }
 
     // Controller functions
+
+    function returnCellLocation() {
+        document.getElementById('debug').innerHTML = '';
+        var cells = document.getElementsByTagName('td')[0];
+        for (var i = 0; i < cells.length; i++) {
+            cells[i] = function () {
+                var col = this.cellIndex;
+                var row = this.parentNode.rowIndex;
+                var cell = gridTable.rows[row].cells[col];
+                if (cell.className === '') {
+                    game.playerGrid = markGridMiss(row - 1, col -1, game.playerGrid);
+                    game.playerGrid = displayBoard(game.playerGrid);
+                }
+            } 
+        }
+    }
 
     //Function  :playerAttack()
     //Purpose   :handle player interaction with enemy board, update ships, and manage turns
@@ -63,6 +78,7 @@ function main() {
             var cells = document.getElementsByTagName('td');
             for (var i = 0; i < cells.length; i++) {
                 cells[i].onclick = function () {
+                    document.getElementById('debug').innerHTML = '';
                     var message = document.getElementById('message');
                     var newMessage = '<br>';
                     var col = this.cellIndex;
@@ -317,25 +333,6 @@ function main() {
         }
         return false;
     }
-
-    //Function  :returnCellContent()
-    //Purpose   :simple method demonstrating onclick handlers while the main codebase remains inaccessible
-    //Parameters:none
-    //Returns   :event
-    function returnCellContent() {
-        var cells = document.getElementsByTagName('td');
-
-        for (var i = 0; i < cells.length; i++) {
-            cells[i].onclick = updateCellContent;
-        }
-    }
-
-    //Function  :updateCellContent()
-    //Purpose   :onclick handler demonstration while main project handlers remain unavailable
-    //Parameters:none
-    //Returns   :none
-    function updateCellContent() {
-
-    }
 }
+
 

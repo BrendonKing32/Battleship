@@ -31,14 +31,4 @@ function displayBoard(board) {
     }
     return html;
 }
-//Function  :displayName()
-//Purpose   :update board.html with player name
-//Parameters:user input
-//Returns   :updated header
-function displayName() {
-    var playerName = document.getElementById('player-name');
-    var nameInput = document.getElementById('name-input');
-    nameInput.oninput = function () {
-        playerName.innerHTML = 'Name: ' + this.value;
-    }
-}
+
