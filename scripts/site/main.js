@@ -7,7 +7,7 @@ Description:Contains the generic code for the functionality of the site.
 */
 
 //Function  :myMove()
-//Purpose   :move an element on a diagonal
+//Purpose   :move an element on a diagonal and play sound at the end.
 //Parameters:none
 //Returns   :none
 function myMove() {
