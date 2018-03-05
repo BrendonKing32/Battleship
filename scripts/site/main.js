@@ -26,3 +26,15 @@ function myMove() {
         }
     }
 }
+
+//Function  :returnCellCoord()
+//Purpose   :handle onclick events of 
+//Parameters:none
+//Returns   :none
+function returnCellCoord() {
+    var cells = document.getElementsByTagName('td');
+    for (var i = 0; i < cells.length; i++) {
+        var row = this.cellIndex;
+        var col = parentNode.col
+    }
+}

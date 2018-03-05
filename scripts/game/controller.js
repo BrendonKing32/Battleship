@@ -17,7 +17,7 @@ function main() {
     var game = newGame();
     var playerGrid = document.getElementById('playerGrid');
     var computerGrid = document.getElementById('computerGrid');
-    //game.computerFleet = loadComputerConfig(game.computerFleet);
+    game.computerFleet = loadComputerConfig(game.computerFleet);
 
     // Initialize player grid
     game.grid = initializeGrid(game.grid);
@@ -155,7 +155,7 @@ function main() {
                 newMessage = 'The computer hit ' + cell.id;
                 game.playerFleet = markShipHit(cell.id, game.playerFleet);
                 game.grid = markGridHit(row - 1, col - 1, game.grid);
-                playerGrid.innerHTML = displayGrid(game.grid);
+                playerGrid.innerHTML = displayBoard(game.grid);
                 if (game.playerFleet[cell.id].sunk === true) {
                     if (game.playerFleet.shipsSunk == 5) {
                         document.getElementById('start-game').style.visibility = 'visible';
@@ -282,6 +282,38 @@ function main() {
             }
         }
         return grid;
+    }
+
+    function loadJSON(callback) {
+        var xobj = new XMLHttpRequest();
+        xobj.overrideMimeType("application/json");
+        xobj.open('GET', callback, false);
+        xobj.send();
+        var response = JSON.parse(xobj.responseText);
+        return response
+    }
+
+    function loadComputerConfig(computerFleet) {
+        var JSON = loadJSON('scripts/game/layout/config.json');
+        var shipConfig = Math.floor((Math.random() * 5) + 1);
+        var i = 0;
+        for (var key in computerShips) {
+            switch (key) {
+                case "computerCarrier":
+                    i = 0;
+                    break;
+                case "computerBattleship":
+                    i = 1;
+                    break;
+                case "computerCruiser":
+                    i = 2;
+                    break;
+                case "computerSub":
+                    i = 3;
+                    break;
+                case "computerDestroyer":
+                    i = 4;
+                    break;
     }
 
     //Function  :addShipsToGrid(ships, grid, player)
