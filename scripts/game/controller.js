@@ -17,7 +17,7 @@ function main() {
     var game = newGame();
     var playerGrid = document.getElementById('playerGrid');
     var computerGrid = document.getElementById('computerGrid');
-    game.computerFleet = loadComputerConfig(game.computerFleet);
+    //game.computerFleet = loadComputerConfig(game.computerFleet);
 
     // Initialize player grid
     game.grid = initializeGrid(game.grid);
@@ -47,8 +47,6 @@ function main() {
                 playerAttack();
             }
         }
-        var cells = playerGrid.getElementByTagName('td');
-        cells.onclick = returnCellLocation();
     }
 
     // Controller functions
@@ -148,7 +146,7 @@ function main() {
             row = point[0];
             col = point[1];
             game.computerGuesses.push(point);
-            var cell = playerGrid.rows[row].cells[col];
+            var cell = playerBoard.rows[row].cells[col];
             var message = document.getElementById('message');
             var newMessage = '<br>';
             if (cell.className === 'ship') {
@@ -283,39 +281,7 @@ function main() {
         }
         return grid;
     }
-
-    function loadJSON(callback) {
-        var xobj = new XMLHttpRequest();
-        xobj.overrideMimeType("application/json");
-        xobj.open('GET', callback, false);
-        xobj.send();
-        var response = JSON.parse(xobj.responseText);
-        return response
-    }
-
-    function loadComputerConfig(computerFleet) {
-        var JSON = loadJSON('scripts/game/layout/config.json');
-        var shipConfig = Math.floor((Math.random() * 5) + 1);
-        var i = 0;
-        for (var key in computerShips) {
-            switch (key) {
-                case "computerCarrier":
-                    i = 0;
-                    break;
-                case "computerBattleship":
-                    i = 1;
-                    break;
-                case "computerCruiser":
-                    i = 2;
-                    break;
-                case "computerSub":
-                    i = 3;
-                    break;
-                case "computerDestroyer":
-                    i = 4;
-                    break;
-    }
-
+    
     //Function  :addShipsToGrid(ships, grid, player)
     //Purpose   :manage the updating of the computer fleet from congiguration files
     //Parameters:ship arrays, grid objects, player values
@@ -334,7 +300,7 @@ function main() {
         }
         return grid;
     }
-
+    
     //Function  :handleShipPlacement()
     //Purpose   :event handler for ship placement
     //Parameters:grid, array playerFleet
@@ -348,6 +314,47 @@ function main() {
             return grid;
         }
         return grid;
+    }
+
+    //Function  :loadJSON
+    //Purpose   :serve JSON configuration file
+    //Parameters:traceback from loadComputerConfig
+    //Returns   :JSON data
+    function loadJSON(callback) {
+        var xobj = new XMLHttpRequest();
+        xobj.open('GET', callback, false);
+        xobj.send();
+        var response = JSON.parse(xobj.responseText);
+        return response
+    }
+
+    //Function  :loadComputerConfig()
+    //Purpose   :populate computer Fleet coordinates with information from JSON
+    //Parameters:computerFleet array
+    //Returns   :none (updates array)
+    function loadComputerConfig(computerFleet) {
+        var JSON = loadJSON('scripts/game/layout/config.json');
+        var shipConfig = Math.floor((Math.random() * 5) + 1);
+        var i = 0;
+        for (var key in computerFleet) {
+            switch (key) {
+                case "computerCarrier":
+                    i = 0;
+                    break;
+                case "computerBattleship":
+                    i = 1;
+                    break;
+                case "computerCruiser":
+                    i = 2;
+                    break;
+                case "computerSub":
+                    i = 3;
+                    break;
+                case "computerDestroyer":
+                    i = 4;
+                    break;
+            }
+        }
     }
 
     //Function  :comparePoints()

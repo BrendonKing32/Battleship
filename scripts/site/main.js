@@ -6,6 +6,8 @@ Version    :Version 01
 Description:Contains the generic code for the functionality of the site.
 */
 
+window.onload = rerturnCellCoord();
+
 //Function  :myMove()
 //Purpose   :move an element on a diagonal and play sound at the end.
 //Parameters:none
