@@ -326,14 +326,14 @@ function main() {
         var cells = document.getElementsByTagName('td');
 
         for (var i = 0; i < cells.length; i++) {
-            cells[i].onclick = markGridMiss;
+            cells[i].onclick = updateCellContent;
         }
     }
 
-    //Function  :
-    //Purpose   :
-    //Parameters:
-    //Returns   :
+    //Function  :updateCellContent()
+    //Purpose   :onclick handler demonstration while main project handlers remain unavailable
+    //Parameters:none
+    //Returns   :none
     function updateCellContent() {
 
     }
