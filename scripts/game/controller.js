@@ -10,8 +10,6 @@ window.onload = main();
 
 function main() {
     // Initialize game Model and load computer ships
-    // moveLegend();
-    // displayName();
     var game = newGame();
     var playerGrid = document.getElementById('playerGrid');
     var computerGrid = document.getElementById('computerGrid');
@@ -27,14 +25,14 @@ function main() {
     computerBoard.innerHTML = displayBoard(game.computerGrid);
 
     // Handle the placement of the player's ships on the player grid
-    game.grid = handleShipPlacement(game.grid, game.playerShips);
+    game.grid = handleShipPlacement(game.grid, game.playerFleet);
 
     // Save and Load game data
     var loadGameButton = document.getElementById('load-game');
     loadGameButton.onclick = function () {
         var saveGame = loadSaveGame();
-        game.grid = addShipsToGrid(saveGame.playerShips, game.grid, true);
-        game.playerShips = saveGame.playerShips;
+        game.grid = addShipsToGrid(saveGame.playerFleet, game.grid, true);
+        game.playerFleet = saveGame.playerFleet;
         playerGrid.innerHTML = displayGrid(game.grid);
     }
     var saveGameButton = document.getElementById('save-game');
@@ -43,16 +41,13 @@ function main() {
         return false;
     }
     var clearStorage = document.getElementById('clear-storage');
-    clearStorage.onclick = function () {
-        clearLocalStorage();
-        return false;
     }
 
     // Handle game play and turns
     var startGameButton = document.getElementById('start-game');
     startGameButton.onclick = function () {
-        if (game.playerShips.placedCount == 5) {
-            if (game.computerShips.shipsSunk === 5 || game.playerShips.shipsSunk === 5) {
+        if (game.playerFleet.placedCount == 5) {
+            if (game.computerShips.shipsSunk === 5 || game.playerFleet.shipsSunk === 5) {
                 startGameButton.innerHTML = 'Start Game';
                 main();
             }
@@ -60,22 +55,18 @@ function main() {
                 computerAttack();
                 startGameButton.style.visibility = 'hidden';
                 playerAttack();
-                document.getElementById('debug').innerHTML = 'It is now your turn. Make a guess by clicking in the Computer Grid';
             }
         }
         else {
-            document.getElementById('debug').innerHTML = 'You must place all your ships before you can play.';
         }
     }
 
     // Controller functions
     function playerAttack() {
-        document.getElementById('debug').innerHTML = '';
         if (game.computerShips.shipsSunk !== 5) {
             var cells = document.getElementsByTagName('td');
             for (var i = 0; i < cells.length; i++) {
                 cells[i].onclick = function () {
-                    document.getElementById('debug').innerHTML = '';
                     var message = document.getElementById('message');
                     var newMessage = '<br>';
                     var col = this.cellIndex;
@@ -120,8 +111,7 @@ function main() {
     }
 
     function computerAttack() {
-        document.getElementById('debug').innerHTML = 'It is now your turn. Make a guess by clicking in the Computer Grid';
-        if (game.playerShips.shipsSunk !== 5) {
+        if (game.playerFleet.shipsSunk !== 5) {
             var point = generatePoint();
             var row = point[0];
             var col = point[1];
@@ -147,11 +137,11 @@ function main() {
             var newMessage = '<br>';
             if (cell.className === 'ship') {
                 newMessage = 'The computer hit ' + cell.id;
-                game.playerShips = markShipHit(cell.id, game.playerShips);
+                game.playerFleet = markShipHit(cell.id, game.playerFleet);
                 game.grid = markGridHit(row - 1, col - 1, game.grid);
                 playerGrid.innerHTML = displayGrid(game.grid);
-                if (game.playerShips[cell.id].sunk === true) {
-                    if (game.playerShips.shipsSunk == 5) {
+                if (game.playerFleet[cell.id].sunk === true) {
+                    if (game.playerFleet.shipsSunk == 5) {
                         document.getElementById('start-game').style.visibility = 'visible';
                         document.getElementById('start-game').innerHTML = 'New Game';
                         newMessage = 'The computer wins...';
@@ -291,55 +281,31 @@ function main() {
         return grid;
     }
 
-    function handleShipPlacement(grid, playerShips) {
-        var placeButton = document.getElementById('place-button');
-        placeButton.onclick = function () {
-            var updatedShips = placeShip(playerShips);
+    function handleShipPlacement(grid, playerFleet) {
+        var placementButton = document.getElementById('placement-button');
+        placementButton.onclick = function () {
+            var updatedShips = placeShip(playerFleet);
             grid = addShipsToGrid(updatedShips, grid, true);
-            playerGrid.innerHTML = displayGrid(grid);
+            playerBoard.innerHTML = displayBoard(grid);
             return grid;
         }
         return grid;
     }
 
     function handleLogin() {
-        var loginButton = document.getElementById('login-button');
-        var ajax = new XMLHttpRequest();
-        var username = document.getElementById('username').value;
-        var password = document.getElementById('password').value
-        var data = 'userName=' + username + '&password=' + password;
-        ajax.onreadystatechange = function () {
-            if (ajax.readyState == 4) {
-                var response = JSON.parse(ajax.responseText);
-                if (response.result == 'valid') {
-                    var timestamp = 'User: ' + username + ' ' + response.timestamp;
-                    localStorage.setItem('cs2550timestamp', timestamp);
-                    window.location = 'grid.html';
-                }
-                else {
-                    document.getElementById('home-message').innerHTML = '<h3>Invalid Login Credentials</h3>';
-                }
-            }
-        }
-        ajax.open('POST', 'http://universe.tc.uvu.edu/cs2550/assignments/PasswordCheck/check.php', true);
-        ajax.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-        ajax.send(data);
     }
 
     function saveGame(game) {
-        var message = document.getElementById('debug').innerHTML = 'Your game was successfully saved!';
         var gameData = JSON.stringify(game);
         localStorage.setItem('save-game', gameData);
     }
 
     function loadSaveGame() {
-        var message = document.getElementById('debug').innerHTML = 'Your game was successfully loaded!';
         var saveGame = localStorage.getItem('save-game');
         return JSON.parse(saveGame);
     }
 
     function clearLocalStorage() {
-        var message = document.getElementById('debug').innerHTML = 'Your save game data was successfully cleared!';
         localStorage.removeItem('save-game');
         main();
     }
@@ -355,4 +321,3 @@ function main() {
         }
         return false;
     }
-}

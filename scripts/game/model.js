@@ -12,17 +12,17 @@ function newGame() {
 }
 
 // Objects
-function Game(grid, computerGrid, playerShips, computerShips) {
+function Game(grid, computerGrid, playerFleet, computerShips) {
     this.grid = grid;
     this.computerGrid = computerGrid;
-    this.playerShips = playerShips;
+    this.playerFleet = playerFleet;
     this.computerShips = computerShips;
     this.computerGuesses = new Array();
     this.computerRow = -1;
     this.computerCol = -1;
 }
 
-function PlayerShips() {
+function PlayerFleet() {
     this.placedCount = 0;
     this.playerCarrier;
     this.playerBattleship;
@@ -52,15 +52,15 @@ function Ship(size, location) {
 function initializeGame() {
     var grid = createGridArray(10, 10);
     var computerGrid = createGridArray(10, 10);
-    var playerShips = new PlayerShips();
+    var playerFleet = new PlayerFleet();
     var computerShips = new ComputerShips();
 
     // Generates Player ships
-    playerShips.playerCarrier = new Ship(5, []);
-    playerShips.playerBattleship = new Ship(4, []);
-    playerShips.playerCruiser = new Ship(3, []);
-    playerShips.playerSub = new Ship(3, []);
-    playerShips.playerDestroyer = new Ship(2, []);
+    playerFleet.playerCarrier = new Ship(5, []);
+    playerFleet.playerBattleship = new Ship(4, []);
+    playerFleet.playerCruiser = new Ship(3, []);
+    playerFleet.playerSub = new Ship(3, []);
+    playerFleet.playerDestroyer = new Ship(2, []);
 
     // Generates Computer ships
     computerShips.computerCarrier = new Ship(5, []);
@@ -69,7 +69,7 @@ function initializeGame() {
     computerShips.computerSub = new Ship(3, []);
     computerShips.computerDestroyer = new Ship(2, []);
 
-    var game = new Game(grid, computerGrid, playerShips, computerShips);
+    var game = new Game(grid, computerGrid, playerFleet, computerShips);
     return game;
 }
 
@@ -85,43 +85,41 @@ function createGridArray(x, y) {
 }
 
 // Implement these functions later on to update the Model
-function placeShip(playerShips) {
-    var debug = document.getElementById('debug');
-    var ship = document.getElementById('ship').value;
-    var row = parseInt(document.getElementById('row').value) - 1;
-    var col = parseInt(document.getElementById('col').value) - 1;
+function placeShip(playerFleet) {
+    var ship = document.getElementById('input-ship').value;
+    var row = parseInt(document.getElementById('input-row').value) - 1;
+    var col = parseInt(document.getElementById('input-col').value) - 1;
     if (col > 9 || row > 9) {
-        debug.innerHTML += '<p class="error">You cannot place a ship out of bounds.</p>'
+        window.alert("You cannot place a ship out of bounds!")
         return false;
     }
-    var direction = document.getElementById('direction').value;
+    var direction = document.getElementById('input-direction').value;
     var location = [];
-    if (playerShips[ship].shipLocation.length > 0) {
-        debug.innerHTML += '<p class="error">That ship has already been placed</p>'
+    if (playerFleet[ship].shipLocation.length > 0) {
+        window.alert("That ship has been placed!");
         return false;
     }
     if (direction == 'horizontal') {
-        for (var i = 0; i < playerShips[ship].shipSize; i++) {
-            if (col + playerShips[ship].shipSize > 10) {
-                debug.innerHTML += '<p class="error">You cannot place a ship out of bounds.</p>'
+        for (var i = 0; i < playerFleet[ship].shipSize; i++) {
+            if (col + playerFleet[ship].shipSize > 10) {
+                window.alert("You cannot place a ship out of bounds!");
                 return false;
             }
             location.push({ 'x': col + i, 'y': row });
         }
     }
     else if (direction == 'vertical') {
-        for (var i = 0; i < playerShips[ship].shipSize; i++) {
-            if (row + playerShips[ship].shipSize > 10) {
-                debug.innerHTML += '<p class="error">You cannot place a ship out of bounds.</p>'
+        for (var i = 0; i < playerFleet[ship].shipSize; i++) {
+            if (row + playerFleet[ship].shipSize > 10) {
+                window.alert("You cannot place a ship out of bounds!");
                 return false;
             }
             location.push({ 'x': col, 'y': row + i });
         }
     }
-    debug.innerHTML = '<p><b>Ship: </b>' + ship + '</p><p><b> Column: </b>' + (col + 1) + '</p><p><b> Row: </b>' + (row + 1) + '</p><p><b> Direction: </b>' + direction;
-    playerShips[ship].shipLocation = location;
-    playerShips.placedCount++;
-    return playerShips;
+    playerFleet[ship].shipLocation = location;
+    playerFleet.placedCount++;
+    return playerFleet;
 }
 
 function markShipHit(ship, ships) {

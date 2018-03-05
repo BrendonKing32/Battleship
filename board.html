@@ -19,11 +19,46 @@ Description:Semester project for CS 2550 at Utah Valley University.
     <h1 align="center">PLAY BATTLESHIP!</h1>
     <div class="controls">
         <h4>GAME MANAGEMENT</h4>
-        <button id="start-game">NEW GAME</button>
+        <button id="start-game">START GAME</button>
         <button id="load-game" style="float:">LOAD GAME</button>
         <button id="save-game">SAVE GAME</button>
-        <button id="ship-direction">ORIENT SHIP</button>
-        <button id="placement-button">PLACE SHIP</button>
+
+        <h4>SHIP PLACEMENT</h4>
+        <div class="row">
+            <div class="column">
+                <b>COL  :</b>
+                <input id="input-col" min="1" max="10" type="number">
+                <b>VESSEL SELECT:</b>
+                <select id="input-ship">
+                    <option value="playerCarrier">Carrier</option>
+                    <option value="playerBattleship">Battleship</option>
+                    <option value="playerCruiser">Cruiser</option>
+                    <option value="playerSub">Submarine</option>
+                    <option value="playerDestroyer">Destroyer</option>
+                </select>
+                <br />
+                <b>ROW:</b>
+                <input id="input-row" min="1" max="10" type="number">
+                <b>ORIENTATION :</b>
+                <select id="input-direction">
+                    <option value="horizontal">Horizontal</option>
+                    <option value="vertical">Vertical</option>
+                </select>
+                <br />
+                <br />
+                <button id="placement-button">PLACE SHIP</button>
+            </div>
+            <div class="column">
+                <label>Name:</label>
+                <br />
+                <label>Column:</label>
+                <br />
+                <label>Row:</label>
+                <br />
+                <label>Orientation:</label>
+            </div>
+        </div>
+        
     </div>
     <br />
     <div class="row">
