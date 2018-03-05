@@ -11,12 +11,14 @@ Description:Contains the generic code for the functionality of the site.
 //Parameters:none
 //Returns   :none
 function myMove() {
+    var sound = new Audio('media/game/audio/victory.wav');
     var elem = document.getElementById("animate");
     var pos = 0;
     var id = setInterval(frame, 5);
     function frame() {
         if (pos == 450) {
             clearInterval(id);
+            sound.play();
         } else {
             pos++;
             elem.style.top = pos + 'px';
