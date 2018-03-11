@@ -6,10 +6,10 @@ Version    :Version 03
 Description:Contains the functions that serve information to the browser for the user/requestor
 */
 
-//Function  :GenerateTable
+//Function  :displayBoard()
 //Purpose   :create the game boards that the players will use
 //Parameters:int numRows, int numColumns, playerID
-//Returns   :table element
+//Returns   :html <td> elements
 function displayBoard(board) {
     var html = '';
     for (var i = -1; i < board.length; i++) {
@@ -25,17 +25,10 @@ function displayBoard(board) {
                 
             }
             else {
-                html += '<th style="background:lightblue">';
+                html += board[j][i];                 
             }
         }
     }
     return html;
 }
 
-//Function  :GenerateForm
-//Purpose   :Create and append the controls to board.html
-//Parameters:none
-//Returns   :none
-function GenerateForm() {
-
-}

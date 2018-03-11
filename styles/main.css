@@ -86,15 +86,42 @@ caption {
     font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif
 }
 
-table {
-  background: #1a1b1d;
-}
-
 td, th {
     table-layout: fixed;
     text-align: center;
-    border: #1a1b1d;
-    width: 45px;
-    height: 45px;
+    border:1px solid black;
+    border-width: 1px;
+    width: 50px;
+    height: 50px;
     font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif
+}
+
+td:hover {
+    background-color:green;
+}
+
+.hit {
+    background-color:red;
+}
+
+.ship {
+    background-color:lightgray;
+}
+
+.miss {
+    background-color:blue;
+}
+
+#container {
+    width: 500px;
+    height: 500px;
+    position: relative;
+    background: lightblue;
+}
+
+#animate {
+    width: 50px;
+    height: 50px;
+    position: absolute;
+    background: blue;
 }
