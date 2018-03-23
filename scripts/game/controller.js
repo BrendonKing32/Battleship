@@ -333,7 +333,7 @@ function main() {
     //Parameters:computerFleet array
     //Returns   :none (updates array)
     function loadComputerConfig(computerFleet) {
-        var JSON = loadJSON('scripts/game/layout/config.json');
+        var JSON = loadJSON('scripts/game/configuration/config.json');
         var shipConfig = Math.floor((Math.random() * 5) + 1);
         var i = 0;
         for (var key in computerFleet) {
