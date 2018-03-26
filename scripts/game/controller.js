@@ -31,7 +31,15 @@ function main() {
     // Handle the placement of the player's ships on the player grid
     game.grid = handleShipPlacement(game.grid, game.playerFleet);
 
+    // Manage Player Login
+    var loginButton = document.getElementById('login-button');
+    loginButton.onclick = function () {
+        displayLogin();
+    }
+
     // Save and Load game data
+    var saveButton = document.getElementById('save-game');
+
 
     // Handle game play and turns
     var startGameButton = document.getElementById('start-game');
@@ -371,6 +379,38 @@ function main() {
             }
         }
         return false;
+    }
+
+    //Function  :
+    //Purpose   :
+    //Parameters:
+    //Returns   :
+    function displayLogin() {
+        window.open('login.html', '', 'width=350,height=175')
+    }
+
+    //Function  :
+    //Purpose   :
+    //Parameters:
+    //Returns   :
+    function handleLogin() {
+        var ajax = new XMLHttpRequest();
+        var username = document.getElementById('username').value;
+        var password = document.getElementById('password').value;
+        var data = 'userName=' + username + '&password=' + password;
+        ajax.onreadystatechange = function () {
+            if (ajax.readyState == 4) {
+                var response = JSON.parse(ajax.responseText);
+                if (response.result == 'valid') {
+                    var timestamp = 'User: ' + username + '' + response.timestamp;
+                    localStorage.setItem('cs2550timestamp', timestamp);
+                    window.location = 'board.html';
+                }
+                else {
+                    window.alert("INVALID LOGIN CREDENTIALS!");
+                }
+            }
+        }
     }
 }
 
