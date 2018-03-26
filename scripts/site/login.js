@@ -8,10 +8,10 @@ Description:Contains the code for login
 
 window.onload = main;
 
-//Function  :
-//Purpose   :
-//Parameters:
-//Returns   :
+//Function  :main
+//Purpose   :constructor method for login
+//Parameters:none
+//Returns   :none
 function main() {
 
     //handlers
@@ -26,10 +26,10 @@ function main() {
     }
 }
 
-//Function  :
-//Purpose   :
-//Parameters:
-//Returns   :
+//Function  :handleLogin()
+//Purpose   :requests data from server
+//Parameters:none
+//Returns   :none
 function handleLogin() {
     var ajax = new XMLHttpRequest();
     var loginURL = 'http://universe.tc.uvu.edu/cs2550/assignments/PasswordCheck/check.php';
@@ -44,12 +44,12 @@ function handleLogin() {
         if (ajax.readyState == 4) {
             var response = JSON.parse(ajax.responseText);
             if (response.result == "valid") {
-                var timestamp = 'User: ' + username + '' + response.timestamp;
+                var timestamp = 'User: ' + username + ' ' + response.timestamp;
                 localStorage.setItem('cs2550timestamp', timestamp);
                 window.close();
             }
             else {
-                window.alert("INVALID RESPONSE FROM SERVER!");
+                debug.innerHTML = "INVALID RESPONSE FROM SERVER!";
             }
         }
     }
