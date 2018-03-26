@@ -32,14 +32,22 @@ function main() {
     game.grid = handleShipPlacement(game.grid, game.playerFleet);
 
     // Manage Player Login
+    var loginStatus = document.getElementById('login-status');
     var loginButton = document.getElementById('login-button');
+    var csTimeStamp = localStorage.getItem('cs2550timestamp');
     loginButton.onclick = function () {
         displayLogin();
+        window.onfocus = function () {
+            loginStatus.innerHTML = csTimeStamp;
+        }
     }
 
+    
+    // Clear button
     var clearButton = document.getElementById('clear-button');
     clearButton.onclick = function () {
         localStorage.clear();
+        loginStatus.innerHTML = "NOT LOGGED IN!";
     }
 
     // Save and Load game data
@@ -391,7 +399,7 @@ function main() {
     //Parameters:
     //Returns   :
     function displayLogin() {
-        window.open('login.html', '', 'width=335,height=165')
+        window.open('login.html', '', 'width=350,height=200');
     }
 }
 
