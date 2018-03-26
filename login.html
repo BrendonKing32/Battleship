@@ -4,22 +4,20 @@
     <meta charset="UTF-8">
     <title>Login</title>
     <link type="text/css" rel="stylesheet" href="styles/main.css">
-    <script src="scripts/game/model.js"></script>
-    <script src="scripts/game/view.js"></script>
-    <script src="scripts/game/controller.js"></script>
     <script src="scripts/site/login.js"></script>
 </head>
 <body>
     <b>Username:</b>
     <br>
-    <input id="username" type="text">
+    <input id="username" type="text" placeholder="ex: Bilbo">
     <br>
     <b>Password:</b>
     <br>
-    <input id="password" type="password">
+    <input id="password" type="password" placeholder="ex: 123">
     <br>
     <br>
     <button id="confirm-login">Login</button>
-    <button onclick="window.close()">Cancel</button>
+    <button id="cancel-operation">Cancel</button>
+    <div id="debug"></div>
 </body>
 </html>

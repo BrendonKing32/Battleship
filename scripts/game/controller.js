@@ -37,6 +37,11 @@ function main() {
         displayLogin();
     }
 
+    var clearButton = document.getElementById('clear-button');
+    clearButton.onclick = function () {
+        localStorage.clear();
+    }
+
     // Save and Load game data
     var saveButton = document.getElementById('save-game');
 
@@ -386,7 +391,7 @@ function main() {
     //Parameters:
     //Returns   :
     function displayLogin() {
-        window.open('login.html', '', 'width=340,height=175')
+        window.open('login.html', '', 'width=335,height=165')
     }
 }
 
