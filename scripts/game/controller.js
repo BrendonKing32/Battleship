@@ -386,31 +386,7 @@ function main() {
     //Parameters:
     //Returns   :
     function displayLogin() {
-        window.open('login.html', '', 'width=350,height=175')
-    }
-
-    //Function  :
-    //Purpose   :
-    //Parameters:
-    //Returns   :
-    function handleLogin() {
-        var ajax = new XMLHttpRequest();
-        var username = document.getElementById('username').value;
-        var password = document.getElementById('password').value;
-        var data = 'userName=' + username + '&password=' + password;
-        ajax.onreadystatechange = function () {
-            if (ajax.readyState == 4) {
-                var response = JSON.parse(ajax.responseText);
-                if (response.result == 'valid') {
-                    var timestamp = 'User: ' + username + '' + response.timestamp;
-                    localStorage.setItem('cs2550timestamp', timestamp);
-                    window.location = 'board.html';
-                }
-                else {
-                    window.alert("INVALID LOGIN CREDENTIALS!");
-                }
-            }
-        }
+        window.open('login.html', '', 'width=340,height=175')
     }
 }
 
