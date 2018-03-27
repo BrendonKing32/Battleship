@@ -34,10 +34,11 @@ function main() {
     // Manage Player Login
     var loginStatus = document.getElementById('login-status');
     var loginButton = document.getElementById('login-button');
-    var csTimeStamp = localStorage.getItem('cs2550timestamp');
+    
     loginButton.onclick = function () {
         displayLogin();
         window.onfocus = function () {
+            var csTimeStamp = localStorage.getItem('cs2550timestamp');
             loginStatus.innerHTML = csTimeStamp;
         }
     }
@@ -46,8 +47,8 @@ function main() {
     // Clear button
     var clearButton = document.getElementById('clear-button');
     clearButton.onclick = function () {
-        localStorage.clear();
-        loginStatus.innerHTML = "NOT LOGGED IN!";
+        localStorage.removeItem('cs2550timestamp');
+        loginStatus.innerHTML = "User: ";
     }
 
     // Save and Load game data
