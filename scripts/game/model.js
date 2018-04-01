@@ -114,8 +114,6 @@ function createGridArray(x, y) {
     return grid;
 }
 
-// Implement these functions later on to update the Model
-
 //Function  :placeShip()
 //Purpose   :updates the location of the player ships with information from the view
 //Parameters:playerFleet array
@@ -124,8 +122,15 @@ function placeShip(playerFleet) {
     var ship = document.getElementById('input-ship').value;
     var row = parseInt(document.getElementById('input-row').value) - 1;
     var col = parseInt(document.getElementById('input-col').value) - 1;
+
+    //test for values
+    if (col === NaN || row === NaN) {
+        window.alert("Column and Row must be selected first!");
+        return false;
+    }
+    //check values
     if (col > 9 || row > 9) {
-        window.alert("You cannot place a ship out of bounds!")
+        window.alert("You cannot place a ship out of bounds!");
         return false;
     }
     var direction = document.getElementById('input-direction').value;
