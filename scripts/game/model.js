@@ -123,11 +123,6 @@ function placeShip(playerFleet) {
     var row = parseInt(document.getElementById('input-row').value) - 1;
     var col = parseInt(document.getElementById('input-col').value) - 1;
 
-    //test for values
-    if (col === NaN || row === NaN) {
-        window.alert("Column and Row must be selected first!");
-        return false;
-    }
     //check values
     if (col > 9 || row > 9) {
         window.alert("You cannot place a ship out of bounds!");
