@@ -17,7 +17,7 @@ function main() {
     var game = newGame();
     var playerGrid = document.getElementById('playerGrid');
     var computerGrid = document.getElementById('computerGrid');
-    //game.computerFleet = loadComputerConfig(game.computerFleet);
+    game.computerFleet = loadComputerConfig(game.computerFleet);
 
     // Initialize player grid
     game.grid = initializeGrid(game.grid);
@@ -258,7 +258,7 @@ function main() {
                 if (cell.className !== 'hit') {
                     newMessage = 'The computer missed!';
                     game.grid = markGridMiss(row - 1, col - 1, game.grid);
-                    playerGrid.innerHTML = displayGrid(game.grid);
+                    playerBoard.innerHTML = displayBoard(game.grid);
                 }
             }
             message.innerHTML = newMessage;
@@ -376,7 +376,9 @@ function main() {
                     i = 4;
                     break;
             }
+			computerFleet[key].shipLocation = JSON.computer_config[shipConfig].ships[i];
         }
+		return computerFleet;
     }
 
     //Function  :comparePoints()

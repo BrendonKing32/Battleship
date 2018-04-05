@@ -1,5 +1,10 @@
 {
-"computer_config": {
+  "game_info": {
+    "name": "Battleship",
+    "players": "2",
+    "author": "Brendon King"
+  },
+  "computer_config": {
     "0": {
       "ships": {
         "0": [{"x":1, "y":1}, {"x":1, "y":2}, {"x":1, "y":3}, {"x":1, "y":4}, {"x":1, "y":5}],
