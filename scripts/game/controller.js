@@ -15,6 +15,7 @@ window.onload = main;
 function main() {
     // Initialize game Model and load computer ships
     let game = newGame();
+    displayName();
     let playerGrid = document.getElementById('playerGrid');
     let computerGrid = document.getElementById('computerGrid');
     game.computerFleet = loadComputerConfig(game.computerFleet);
@@ -79,8 +80,10 @@ function main() {
     //Parameters:
     //Returns   :
     function displayName() {
-       let name = document.getElementById('developer-name');
-
+        let name = document.getElementById('developer-name');
+        let JSON = loadJSON('scripts/game/configuration/config.json');
+        let authorName = JSON.game_info.author;
+        name.innerText = 'Written by: ' + authorName;
     }
 
     //Function  :playerAttack()
@@ -345,7 +348,7 @@ function main() {
     //Function  :loadComputerConfig()
     //Purpose   :populate computer Fleet coordinates with information from JSON
     //Parameters:computerFleet array
-    //Returns   :none (updates array)
+    //Returns   :updates computerFleet object
     function loadComputerConfig(computerFleet) {
         let JSON = loadJSON('scripts/game/configuration/config.json');
         let shipConfig = Math.floor((Math.random() * 5) + 1);

@@ -1,7 +1,5 @@
 {
   "game_info": {
-    "name": "Battleship",
-    "players": "2",
     "author": "Brendon King"
   },
   "computer_config": {
