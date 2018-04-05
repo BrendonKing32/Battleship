@@ -6,7 +6,7 @@ Version    :Version 01
 Description:Contains the functions that control user input.
 */
 
-window.onload = main();
+window.onload = main;
 
 //Function  :main
 //Purpose   :main constructor method for battleship
@@ -14,51 +14,52 @@ window.onload = main();
 //Returns   :none
 function main() {
     // Initialize game Model and load computer ships
-    var game = newGame();
-    var playerGrid = document.getElementById('playerGrid');
-    var computerGrid = document.getElementById('computerGrid');
+    let game = newGame();
+    let playerGrid = document.getElementById('playerGrid');
+    let computerGrid = document.getElementById('computerGrid');
     game.computerFleet = loadComputerConfig(game.computerFleet);
 
     // Initialize player grid
     game.grid = initializeGrid(game.grid);
-    playerBoard.innerHTML = displayBoard(game.grid);
+    playerGrid.innerHTML = displayBoard(game.grid);
 
     // Initialize computer grid
     game.computerGrid = initializeGrid(game.computerGrid);
     game.computerGrid = addShipsToGrid(game.computerFleet, game.computerGrid, false);
-    computerBoard.innerHTML = displayBoard(game.computerGrid);
+    computerGrid.innerHTML = displayBoard(game.computerGrid);
 
     // Handle the placement of the player's ships on the player grid
     game.grid = handleShipPlacement(game.grid, game.playerFleet);
 
     // Manage Player Login
-    var loginStatus = document.getElementById('login-status');
-    var loginButton = document.getElementById('login-button');
-    
+    let loginStatus = document.getElementById('login-status');
+    let loginButton = document.getElementById('login-button');
+
     loginButton.onclick = function () {
         displayLogin();
         window.onfocus = function () {
-            var csTimeStamp = localStorage.getItem('cs2550timestamp');
-            loginStatus.innerHTML = csTimeStamp;
+            loginStatus.innerHTML = localStorage.getItem('cs2550timestamp');
         }
-    }
+    };
 
-    
     // Clear button
-    var clearButton = document.getElementById('clear-button');
+    let clearButton = document.getElementById('clear-button');
     clearButton.onclick = function () {
         localStorage.removeItem('cs2550timestamp');
         loginStatus.innerHTML = "User: ";
-    }
+    };
 
     // Save and Load game data
-    var saveButton = document.getElementById('save-game');
+    let saveButton = document.getElementById('save-game');
+    saveButton.onclick = function () {
+
+    };
 
 
     // Handle game play and turns
-    var startGameButton = document.getElementById('start-game');
+    let startGameButton = document.getElementById('start-game');
     startGameButton.onclick = function () {
-        if (game.playerFleet.placedCount == 5) {
+        if (game.playerFleet.placedCount === 5) {
             if (game.computerFleet.shipsSunk === 5 || game.playerFleet.shipsSunk === 5) {
                 startGameButton.innerHTML = 'Start Game';
                 main();
@@ -69,25 +70,9 @@ function main() {
                 playerAttack();
             }
         }
-    }
+    };
 
     // Controller functions
-
-    function returnCellLocation() {
-        document.getElementById('debug').innerHTML = '';
-        var cells = document.getElementsByTagName('td')[0];
-        for (var i = 0; i < cells.length; i++) {
-            cells[i] = function () {
-                var col = this.cellIndex;
-                var row = this.parentNode.rowIndex;
-                var cell = gridTable.rows[row].cells[col];
-                if (cell.className === '') {
-                    game.playerGrid = markGridMiss(row - 1, col -1, game.playerGrid);
-                    game.playerGrid = displayBoard(game.playerGrid);
-                }
-            } 
-        }
-    }
 
     //Function  :playerAttack()
     //Purpose   :handle player interaction with enemy board, update ships, and manage turns
@@ -95,15 +80,15 @@ function main() {
     //Returns   :updated grid and ship objects
     function playerAttack() {
         if (game.computerFleet.shipsSunk !== 5) {
-            var cells = document.getElementsByTagName('td');
-            for (var i = 0; i < cells.length; i++) {
+            let cells = document.getElementsByTagName('td');
+            for (let i = 0; i < cells.length; i++) {
                 cells[i].onclick = function () {
                     document.getElementById('debug').innerHTML = '';
-                    var message = document.getElementById('message');
-                    var newMessage = '<br>';
-                    var col = this.cellIndex;
-                    var row = this.parentNode.rowIndex;
-                    var cell = computerGrid.rows[row].cells[col];
+                    let message = document.getElementById('message');
+                    let newMessage = '<br>';
+                    let col = this.cellIndex;
+                    let row = this.parentNode.rowIndex;
+                    let cell = computerGrid.rows[row].cells[col];
                     if (cell.className === 'hidden-ship') {
                         newMessage = String.fromCharCode(65 + (col - 1)) + ' ' + row + ' was a ' + 'hit!';
                         game.computerFleet = markShipHit(cell.id, game.computerFleet);
@@ -136,7 +121,7 @@ function main() {
             }
         }
         else {
-            newMessage = 'You win!!';
+            window.alert("You win!!!");
             document.getElementById('start-game').style.visibility = 'visible';
             document.getElementById('start-game').innerHTML = 'New Game';
         }
@@ -148,10 +133,10 @@ function main() {
     //Returns   :updated grid
     function computerAttack() {
         if (game.playerFleet.shipsSunk !== 5) {
-            var point = generatePoint();
-            var row = point[0];
-            var col = point[1];
-            var samePoint = false;
+            let point = generatePoint();
+            let row;
+            let col;
+            let samePoint = false;
             if (comparePoints(game.computerGuesses, point)) {
                 samePoint = true;
                 do {
@@ -168,16 +153,16 @@ function main() {
             row = point[0];
             col = point[1];
             game.computerGuesses.push(point);
-            var cell = playerBoard.rows[row].cells[col];
-            var message = document.getElementById('message');
-            var newMessage = '<br>';
+            let cell = playerGrid.rows[row].cells[col];
+            let message = document.getElementById('message');
+            let newMessage = '<br>';
             if (cell.className === 'ship') {
                 newMessage = 'The computer hit ' + cell.id;
                 game.playerFleet = markShipHit(cell.id, game.playerFleet);
                 game.grid = markGridHit(row - 1, col - 1, game.grid);
                 playerGrid.innerHTML = displayBoard(game.grid);
                 if (game.playerFleet[cell.id].sunk === true) {
-                    if (game.playerFleet.shipsSunk == 5) {
+                    if (game.playerFleet.shipsSunk === 5) {
                         document.getElementById('start-game').style.visibility = 'visible';
                         document.getElementById('start-game').innerHTML = 'New Game';
                         newMessage = 'The computer wins...';
@@ -187,7 +172,7 @@ function main() {
                     }
                 }
                 // Make the next guess adjacent or close to the previous guess if it's a hit
-                var origRow = row;
+                let origRow = row;
                 row++;
                 if (row > 9) {
                     row--;
