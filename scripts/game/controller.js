@@ -74,6 +74,14 @@ function main() {
 
     // Controller functions
 
+    //Function  :
+    //Purpose   :
+    //Parameters:
+    //Returns   :
+    function displayName() {
+       let name = document.getElementById('author-name');
+    }
+
     //Function  :playerAttack()
     //Purpose   :handle player interaction with enemy board, update ships, and manage turns
     //Parameters:none
@@ -93,7 +101,7 @@ function main() {
                         newMessage = String.fromCharCode(65 + (col - 1)) + ' ' + row + ' was a ' + 'hit!';
                         game.computerFleet = markShipHit(cell.id, game.computerFleet);
                         game.computerGrid = markGridHit(row - 1, col - 1, game.computerGrid);
-                        computerGrid.innerHTML = displayGrid(game.computerGrid);
+                        computerGrid.innerHTML = displayBoard(game.computerGrid);
                         if (game.computerFleet[cell.id].sunk === true) {
                             if (game.computerFleet.shipsSunk === 5) {
                                 newMessage = 'You win!!';
@@ -110,7 +118,7 @@ function main() {
                         if (cell.className !== 'hit') {
                             newMessage = String.fromCharCode(65 + (col - 1)) + ' ' + row + ' was a ' + 'miss!';
                             game.computerGrid = markGridMiss(row - 1, col - 1, game.computerGrid);
-                            computerGrid.innerHTML = displayGrid(game.computerGrid);
+                            computerGrid.innerHTML = displayBoard(game.computerGrid);
                         }
                     }
                     message.innerHTML = newMessage;
@@ -243,7 +251,7 @@ function main() {
                 if (cell.className !== 'hit') {
                     newMessage = 'The computer missed!';
                     game.grid = markGridMiss(row - 1, col - 1, game.grid);
-                    playerBoard.innerHTML = displayBoard(game.grid);
+                    playerGrid.innerHTML = displayBoard(game.grid);
                 }
             }
             message.innerHTML = newMessage;
@@ -260,8 +268,8 @@ function main() {
     //Parameters:none
     //Returns   :point object
     function generatePoint() {
-        var row = Math.floor((Math.random() * 10) + 1);
-        var col = Math.floor((Math.random() * 10) + 1);
+        let row = Math.floor((Math.random() * 10) + 1);
+        let col = Math.floor((Math.random() * 10) + 1);
         if (game.computerRow > -1) {
             row = game.computerRow;
             game.computerRow = -1;
@@ -270,7 +278,7 @@ function main() {
             col = game.computerCol;
             game.computerCol = -1;
         }
-        var point = [row, col];
+        let point = [row, col];
         return point;
     }
 
@@ -279,9 +287,9 @@ function main() {
     //Parameters:grid data from model.js
     //Returns   :grid object
     function initializeGrid(grid) {
-        for (var h = 0; h < grid.length; h++) {
-            for (var i = 0; i < grid.length; i++) {
-                for (var j = 0; i < grid.length; i++) {
+        for (let h = 0; h < grid.length; h++) {
+            for (let i = 0; i < grid.length; i++) {
+                for (let j = 0; i < grid.length; i++) {
                     grid[i][h] = '<td></td>';
                 }
             }
@@ -294,9 +302,9 @@ function main() {
     //Parameters:ship arrays, grid objects, player values
     //Returns   :updated computer grid
     function addShipsToGrid(ships, grid, player) {
-        for (var key in ships) {
-            for (var a in ships[key].shipLocation) {
-                var location = ships[key].shipLocation[a];
+        for (let key in ships) {
+            for (let a in ships[key].shipLocation) {
+                let location = ships[key].shipLocation[a];
                 if (player == true) {
                     grid[location.x][location.y] = '<td class="ship" id="' + key + '"></td>';
                 }
@@ -313,11 +321,11 @@ function main() {
     //Parameters:grid, array playerFleet
     //Returns   :updated player grid
     function handleShipPlacement(grid, playerFleet) {
-        var placementButton = document.getElementById('placement-button');
+        let placementButton = document.getElementById('placement-button');
         placementButton.onclick = function () {
-            var updatedShips = placeShip(playerFleet);
+            let updatedShips = placeShip(playerFleet);
             grid = addShipsToGrid(updatedShips, grid, true);
-            playerBoard.innerHTML = displayBoard(grid);
+            playerGrid.innerHTML = displayBoard(grid);
             return grid;
         }
         return grid;
@@ -340,10 +348,10 @@ function main() {
     //Parameters:computerFleet array
     //Returns   :none (updates array)
     function loadComputerConfig(computerFleet) {
-        var JSON = loadJSON('scripts/game/configuration/config.json');
-        var shipConfig = Math.floor((Math.random() * 5) + 1);
-        var i = 0;
-        for (var key in computerFleet) {
+        let JSON = loadJSON('scripts/game/configuration/config.json');
+        let shipConfig = Math.floor((Math.random() * 5) + 1);
+        let i = 0;
+        for (let key in computerFleet) {
             switch (key) {
                 case "computerCarrier":
                     i = 0;
@@ -371,7 +379,7 @@ function main() {
     //Parameters:computerGuesses array, point object from generatePoint()
     //Returns   :boolean value (true if good, false if bad)
     function comparePoints(computerGuesses, point) {
-        if (computerGuesses.length == 0) {
+        if (computerGuesses.length === 0) {
             return false;
         }
         for (var i = 0; i < computerGuesses.length; i++) {
