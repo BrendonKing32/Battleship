@@ -75,10 +75,10 @@ function main() {
 
     // Controller functions
 
-    //Function  :
-    //Purpose   :
-    //Parameters:
-    //Returns   :
+    //Function  :displayName()
+    //Purpose   :read information from JSON file and parse it to board.html
+    //Parameters:none
+    //Returns   :none
     function displayName() {
         let name = document.getElementById('developer-name');
         let JSON = loadJSON('scripts/game/configuration/config.json');
