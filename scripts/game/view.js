@@ -31,3 +31,11 @@ function displayBoard(board) {
     }
     return html;
 }
+
+//Function  :displayComputerShips()
+//Purpose   :temp function to prove that computer ships are in fact loading into grid
+//Parameters:none
+//Returns   :none
+function displayComputerShips() {
+
+}

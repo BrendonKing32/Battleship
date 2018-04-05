@@ -25,7 +25,7 @@ function main() {
 
     // Initialize computer grid
     game.computerGrid = initializeGrid(game.computerGrid);
-    game.computerGrid = addShipsToGrid(game.computerFleet, game.computerGrid, false);
+    game.computerGrid = addShipsToGrid(game.computerFleet, game.computerGrid, true);
     computerGrid.innerHTML = displayBoard(game.computerGrid);
 
     // Handle the placement of the player's ships on the player grid
@@ -79,7 +79,8 @@ function main() {
     //Parameters:
     //Returns   :
     function displayName() {
-       let name = document.getElementById('author-name');
+       let name = document.getElementById('developer-name');
+
     }
 
     //Function  :playerAttack()
@@ -278,8 +279,7 @@ function main() {
             col = game.computerCol;
             game.computerCol = -1;
         }
-        let point = [row, col];
-        return point;
+        return [row, col];
     }
 
     //Function  :initializeGrid()
@@ -315,7 +315,7 @@ function main() {
         }
         return grid;
     }
-    
+
     //Function  :handleShipPlacement()
     //Purpose   :event handler for ship placement
     //Parameters:grid, array playerFleet
@@ -327,7 +327,7 @@ function main() {
             grid = addShipsToGrid(updatedShips, grid, true);
             playerGrid.innerHTML = displayBoard(grid);
             return grid;
-        }
+        };
         return grid;
     }
 
@@ -336,11 +336,10 @@ function main() {
     //Parameters:traceback from loadComputerConfig
     //Returns   :JSON data
     function loadJSON(callback) {
-        var xobj = new XMLHttpRequest();
+        let xobj = new XMLHttpRequest();
         xobj.open('GET', callback, false);
         xobj.send();
-        var response = JSON.parse(xobj.responseText);
-        return response
+        return JSON.parse(xobj.responseText)
     }
 
     //Function  :loadComputerConfig()
