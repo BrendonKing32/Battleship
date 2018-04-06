@@ -11,8 +11,7 @@ Description:Contains the functions that control game play and manage the data
 //Parameters:none
 //Returns   :game object
 function newGame() {
-    var game = initializeGame();
-    return game;
+    return initializeGame();
 }
 
 // Objects
@@ -26,7 +25,7 @@ function Game(grid, computerGrid, playerFleet, computerFleet) {
     this.computerGrid = computerGrid;
     this.playerFleet = playerFleet;
     this.computerFleet = computerFleet;
-    this.computerGuesses = new Array();
+    this.computerGuesses = [];
     this.computerRow = -1;
     this.computerCol = -1;
 }

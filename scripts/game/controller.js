@@ -96,37 +96,29 @@ function main() {
             for (let i = 0; i < cells.length; i++) {
                 cells[i].onclick = function () {
                     document.getElementById('debug').innerHTML = '';
-                    let message = document.getElementById('message');
-                    let newMessage = '<br>';
                     let col = this.cellIndex;
                     let row = this.parentNode.rowIndex;
                     let cell = computerGrid.rows[row].cells[col];
                     if (cell.className === 'hidden-ship') {
-                        newMessage = String.fromCharCode(65 + (col - 1)) + ' ' + row + ' was a ' + 'hit!';
                         game.computerFleet = markShipHit(cell.id, game.computerFleet);
                         game.computerGrid = markGridHit(row - 1, col - 1, game.computerGrid);
                         computerGrid.innerHTML = displayBoard(game.computerGrid);
                         if (game.computerFleet[cell.id].sunk === true) {
                             if (game.computerFleet.shipsSunk === 5) {
-                                newMessage = 'You win!!';
                                 document.getElementById('start-game').style.visibility = 'visible';
                                 document.getElementById('start-game').innerHTML = 'New Game';
                                 playerAttack();
                             }
                             else {
-                                newMessage = cell.id + ' was sunk!';
                             }
                         }
                     }
                     else {
                         if (cell.className !== 'hit') {
-                            newMessage = String.fromCharCode(65 + (col - 1)) + ' ' + row + ' was a ' + 'miss!';
                             game.computerGrid = markGridMiss(row - 1, col - 1, game.computerGrid);
                             computerGrid.innerHTML = displayBoard(game.computerGrid);
                         }
                     }
-                    message.innerHTML = newMessage;
-
                     setTimeout(computerAttack, 1000);
                     playerAttack();
                 }
@@ -166,10 +158,7 @@ function main() {
             col = point[1];
             game.computerGuesses.push(point);
             let cell = playerGrid.rows[row].cells[col];
-            let message = document.getElementById('message');
-            let newMessage = '<br>';
             if (cell.className === 'ship') {
-                newMessage = 'The computer hit ' + cell.id;
                 game.playerFleet = markShipHit(cell.id, game.playerFleet);
                 game.grid = markGridHit(row - 1, col - 1, game.grid);
                 playerGrid.innerHTML = displayBoard(game.grid);
@@ -177,10 +166,6 @@ function main() {
                     if (game.playerFleet.shipsSunk === 5) {
                         document.getElementById('start-game').style.visibility = 'visible';
                         document.getElementById('start-game').innerHTML = 'New Game';
-                        newMessage = 'The computer wins...';
-                    }
-                    else {
-                        newMessage = cell.id + ' was sunk!';
                     }
                 }
                 // Make the next guess adjacent or close to the previous guess if it's a hit
@@ -253,12 +238,10 @@ function main() {
             }
             else {
                 if (cell.className !== 'hit') {
-                    newMessage = 'The computer missed!';
                     game.grid = markGridMiss(row - 1, col - 1, game.grid);
                     playerGrid.innerHTML = displayBoard(game.grid);
                 }
             }
-            message.innerHTML = newMessage;
         }
         else {
             document.getElementById('start-game').style.visibility = 'visible';
@@ -308,7 +291,7 @@ function main() {
         for (let key in ships) {
             for (let a in ships[key].shipLocation) {
                 let location = ships[key].shipLocation[a];
-                if (player == true) {
+                if (player === true) {
                     grid[location.x][location.y] = '<td class="ship" id="' + key + '"></td>';
                 }
                 else {
@@ -336,7 +319,7 @@ function main() {
 
     //Function  :loadJSON
     //Purpose   :serve JSON configuration file
-    //Parameters:traceback from loadComputerConfig
+    //Parameters:callback from loadComputerConfig
     //Returns   :JSON data
     function loadJSON(callback) {
         let xobj = new XMLHttpRequest();
@@ -384,7 +367,7 @@ function main() {
         if (computerGuesses.length === 0) {
             return false;
         }
-        for (var i = 0; i < computerGuesses.length; i++) {
+        for (let i = 0; i < computerGuesses.length; i++) {
             if (computerGuesses[i][0] === point[0] && computerGuesses[i][1] === point[1]) {
                 return true;
             }
