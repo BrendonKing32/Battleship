@@ -14,10 +14,10 @@ window.onload = main;
 //Returns   :none
 function main() {
     // Initialize game Model and load computer ships
-    var game = newGame();
+    let game = newGame();
     displayName();
-    var playerGrid = document.getElementById('playerGrid');
-    var computerGrid = document.getElementById('computerGrid');
+    let playerGrid = document.getElementById('playerGrid');
+    let computerGrid = document.getElementById('computerGrid');
     game.computerFleet = loadComputerConfig(game.computerFleet);
 
     // Initialize player grid
@@ -26,15 +26,15 @@ function main() {
 
     // Initialize computer grid
     game.computerGrid = initializeGrid(game.computerGrid);
-    game.computerGrid = addShipsToGrid(game.computerFleet, game.computerGrid, true);
+    game.computerGrid = addShipsToGrid(game.computerFleet, game.computerGrid, false);
     computerGrid.innerHTML = displayBoard(game.computerGrid);
 
     // Handle the placement of the player's ships on the player grid
     game.grid = handleShipPlacement(game.grid, game.playerFleet);
 
     // Manage Player Login
-    var loginStatus = document.getElementById('login-status');
-    var loginButton = document.getElementById('login-button');
+    let loginStatus = document.getElementById('login-status');
+    let loginButton = document.getElementById('login-button');
 
     loginButton.onclick = function () {
         displayLogin();
@@ -44,21 +44,21 @@ function main() {
     };
 
     // Clear button
-    var clearButton = document.getElementById('clear-button');
+    let clearButton = document.getElementById('clear-button');
     clearButton.onclick = function () {
         localStorage.removeItem('cs2550timestamp');
         loginStatus.innerHTML = "User: ";
     };
 
     // Save and Load game data
-    var saveButton = document.getElementById('save-game');
+    let saveButton = document.getElementById('save-game');
     saveButton.onclick = function () {
 
     };
 
 
     // Handle game play and turns
-    var startGameButton = document.getElementById('start-game');
+    let startGameButton = document.getElementById('start-game');
     startGameButton.onclick = function () {
         if (game.playerFleet.placedCount === 5) {
             if (game.computerFleet.shipsSunk === 5 || game.playerFleet.shipsSunk === 5) {
@@ -80,9 +80,9 @@ function main() {
     //Parameters:none
     //Returns   :none
     function displayName() {
-        var name = document.getElementById('developer-name');
-        var JSON = loadJSON('scripts/game/configuration/config.json');
-        var authorName = JSON.game_info.author;
+        let name = document.getElementById('developer-name');
+        let JSON = loadJSON('scripts/game/configuration/config.json');
+        let authorName = JSON.game_info.author;
         name.innerText = 'Written by: ' + authorName;
     }
 
@@ -92,12 +92,12 @@ function main() {
     //Returns   :updated grid and ship objects
     function playerAttack() {
         if (game.computerFleet.shipsSunk !== 5) {
-            var cells = document.getElementsByTagName('td');
-            for (var i = 0; i < cells.length; i++) {
+            let cells = document.getElementsByTagName('td');
+            for (let i = 0; i < cells.length; i++) {
                 cells[i].onclick = function () {
-                    var col = this.cellIndex;
-                    var row = this.parentNode.rowIndex;
-                    var cell = computerGrid.rows[row].cells[col];
+                    let col = this.cellIndex;
+                    let row = this.parentNode.rowIndex;
+                    let cell = computerGrid.rows[row].cells[col];
                     if (cell.className === 'hidden-ship') {
                         game.computerFleet = markShipHit(cell.id, game.computerFleet);
                         game.computerGrid = markGridHit(row - 1, col - 1, game.computerGrid);
@@ -136,10 +136,10 @@ function main() {
     //Returns   :updated grid
     function computerAttack() {
         if (game.playerFleet.shipsSunk !== 5) {
-            var point = generatePoint();
-            var row;
-            var col;
-            var samePoint = false;
+            let point = generatePoint();
+            let row;
+            let col;
+            let samePoint = false;
             if (comparePoints(game.computerGuesses, point)) {
                 samePoint = true;
                 do {
@@ -156,7 +156,7 @@ function main() {
             row = point[0];
             col = point[1];
             game.computerGuesses.push(point);
-            var cell = playerGrid.rows[row].cells[col];
+            let cell = playerGrid.rows[row].cells[col];
             if (cell.className === 'ship') {
                 game.playerFleet = markShipHit(cell.id, game.playerFleet);
                 game.grid = markGridHit(row - 1, col - 1, game.grid);
@@ -169,7 +169,7 @@ function main() {
                     }
                 }
                 // Make the next guess adjacent or close to the previous guess if it's a hit
-                var origRow = row;
+                let origRow = row;
                 row++;
                 if (row > 9) {
                     row--;
@@ -255,8 +255,8 @@ function main() {
     //Parameters:none
     //Returns   :point object
     function generatePoint() {
-        var row = Math.floor((Math.random() * 10) + 1);
-        var col = Math.floor((Math.random() * 10) + 1);
+        let row = Math.floor((Math.random() * 10) + 1);
+        let col = Math.floor((Math.random() * 10) + 1);
         if (game.computerRow > -1) {
             row = game.computerRow;
             game.computerRow = -1;
@@ -273,9 +273,9 @@ function main() {
     //Parameters:grid data from model.js
     //Returns   :grid object
     function initializeGrid(grid) {
-        for (var h = 0; h < grid.length; h++) {
-            for (var i = 0; i < grid.length; i++) {
-                for (var j = 0; i < grid.length; i++) {
+        for (let h = 0; h < grid.length; h++) {
+            for (let i = 0; i < grid.length; i++) {
+                for (let j = 0; i < grid.length; i++) {
                     grid[i][h] = '<td></td>';
                 }
             }
@@ -288,9 +288,9 @@ function main() {
     //Parameters:ship arrays, grid objects, player values
     //Returns   :updated computer grid
     function addShipsToGrid(ships, grid, player) {
-        for (var key in ships) {
-            for (var a in ships[key].shipLocation) {
-                var location = ships[key].shipLocation[a];
+        for (let key in ships) {
+            for (let a in ships[key].shipLocation) {
+                let location = ships[key].shipLocation[a];
                 if (player === true) {
                     grid[location.x][location.y] = '<td class="ship" id="' + key + '"></td>';
                 }
@@ -307,9 +307,9 @@ function main() {
     //Parameters:grid, array playerFleet
     //Returns   :updated player grid
     function handleShipPlacement(grid, playerFleet) {
-        var placementButton = document.getElementById('placement-button');
+        let placementButton = document.getElementById('placement-button');
         placementButton.onclick = function () {
-            var updatedShips = placeShip(playerFleet);
+            let updatedShips = placeShip(playerFleet);
             grid = addShipsToGrid(updatedShips, grid, true);
             playerGrid.innerHTML = displayBoard(grid);
             return grid;
@@ -322,7 +322,7 @@ function main() {
     //Parameters:callback from loadComputerConfig
     //Returns   :JSON data
     function loadJSON(callback) {
-        var xobj = new XMLHttpRequest();
+        let xobj = new XMLHttpRequest();
         xobj.open('GET', callback, false);
         xobj.send();
         return JSON.parse(xobj.responseText)
@@ -333,10 +333,10 @@ function main() {
     //Parameters:computerFleet array
     //Returns   :updates computerFleet object
     function loadComputerConfig(computerFleet) {
-        var JSON = loadJSON('scripts/game/configuration/config.json');
-        var shipConfig = Math.floor((Math.random() * 5) + 1);
-        var i = 0;
-        for (var key in computerFleet) {
+        let JSON = loadJSON('scripts/game/configuration/config.json');
+        let shipConfig = Math.floor((Math.random() * 5) + 1);
+        let i = 0;
+        for (let key in computerFleet) {
             switch (key) {
                 case "computerCarrier":
                     i = 0;
@@ -367,7 +367,7 @@ function main() {
         if (computerGuesses.length === 0) {
             return false;
         }
-        for (var i = 0; i < computerGuesses.length; i++) {
+        for (let i = 0; i < computerGuesses.length; i++) {
             if (computerGuesses[i][0] === point[0] && computerGuesses[i][1] === point[1]) {
                 return true;
             }
