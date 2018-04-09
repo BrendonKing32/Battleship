@@ -164,6 +164,7 @@ function main() {
                         window.alert("You lost...");
                         document.getElementById('start-game').style.visibility = 'visible';
                         document.getElementById('start-game').innerHTML = 'NEW GAME';
+                        playerAttack();
                     }
                 }
                 // Make the next guess adjacent or close to the previous guess if it's a hit
