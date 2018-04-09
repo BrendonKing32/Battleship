@@ -104,17 +104,17 @@ function main() {
                         computerGrid.innerHTML = displayBoard(game.computerGrid);
                         if (game.computerFleet[cell.id].sunk === true) {
                             if (game.computerFleet.shipsSunk === 5) {
+                                gameWinSound.play;
                                 window.alert("YOU WIN!!!");
                                 document.getElementById('start-game').style.visibility = 'visible';
                                 document.getElementById('start-game').innerHTML = 'START GAME';
                                 playerAttack();
                             }
-                            else {
-                            }
                         }
                     }
                     else {
                         if (cell.className !== 'hit') {
+                            shipMissSound.play();
                             game.computerGrid = markGridMiss(row - 1, col - 1, game.computerGrid);
                             computerGrid.innerHTML = displayBoard(game.computerGrid);
                         }
