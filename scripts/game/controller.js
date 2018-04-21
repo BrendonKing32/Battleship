@@ -14,11 +14,11 @@ window.onload = main;
 //Returns   :none
 function main() {
     // Initialize sound files
-    var soundHit = new Audio("media/audio/explode.wav");
-    var soundMiss = new Audio("media/audio/splash.wav");
+    let soundHit = new Audio("media/audio/explode.wav");
+    let soundMiss = new Audio("media/audio/splash.wav");
 
     // Initialize game Model and load computer ships
-    var game = newGame();
+    let game = newGame();
     displayName();
     let playerGrid = document.getElementById('playerGrid');
     let computerGrid = document.getElementById('computerGrid');
@@ -258,16 +258,16 @@ function main() {
     //Parameters:
     //Returns   :
     function saveGame(game) {
-        var gameData = JSON.stringify(game);
+        let gameData = JSON.stringify(game);
         localStorage.setItem('save-game', gameData);
     }
 
-    //Function:
-    //Purpose:
+    //Function  :loadSaveGame()
+    //Purpose   :
     //Parameters:
-    //Returns:
+    //Returns   :
     function loadSaveGame() {
-        var saveGame = localStorage.getItem('save-game');
+        let saveGame = localStorage.getItem('save-game');
         window.alert("Game successfully loaded!");
         return JSON.parse(saveGame);
     }
