@@ -13,8 +13,12 @@ window.onload = main;
 //Parameters:none
 //Returns   :none
 function main() {
+    // Initialize sound files
+    var soundHit = new Audio("media/audio/explode.wav");
+    var soundMiss = new Audio("media/audio/splash.wav");
+
     // Initialize game Model and load computer ships
-    let game = newGame();
+    var game = newGame();
     displayName();
     let playerGrid = document.getElementById('playerGrid');
     let computerGrid = document.getElementById('computerGrid');
@@ -247,6 +251,25 @@ function main() {
             window.alert("You lost...");
             document.getElementById('start-game').innerHTML = 'NEW GAME';
         }
+    }
+
+    //Function  :saveGame()
+    //Purpose   :
+    //Parameters:
+    //Returns   :
+    function saveGame(game) {
+        var gameData = JSON.stringify(game);
+        localStorage.setItem('save-game', gameData);
+    }
+
+    //Function:
+    //Purpose:
+    //Parameters:
+    //Returns:
+    function loadSaveGame() {
+        var saveGame = localStorage.getItem('save-game');
+        window.alert("Game successfully loaded!");
+        return JSON.parse(saveGame);
     }
 
     //Function  :generatePoint()
