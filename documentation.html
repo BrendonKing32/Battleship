@@ -1,0 +1,36 @@
+<!--
+Name        :Brendon King
+Class       :CS 2550
+Title       :Battleship/documentation.html
+Version     :Version 01
+Description :Semester project for CS 2550 at Utah Valley University
+-->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="x-ua-compatible" content="IE=edge">
+    <title>Project Documentation</title>
+    <link rel="stylesheet" type="text/css" media="screen" href="styles/main.css">
+    <link rel="icon" href="media/images/battleship-icon.png">
+</head>
+<body>
+    <h1 align="center">DOCUMENTATION</h1>
+    <h3 align="center">EXPLANATION</h3>
+    <p>At page load, the computer fleet has already been randomly selected and pre-loaded into the appropriate grid on the right side.</p>
+    <p>The game begins by the player using the modified input fields on board.html to place the ships into the players board.  With each confirmation, the computer checks to make sure that:</p>
+    <ol>
+        <li>The ship has not already been placed before</li>
+        <li>The ship length will fit into the game grid</li>
+    </ol>
+    <p>If both of those conditions are met, the system records the location of the ship and places the ship on the board for the player to see.  If it does not, the computer will issue an alert and the player will have to re-check the location.  once all five ships have been placed, the user will be able to interact with the "Start Game" button, beginning the match.</p>
+    <p>The computer will take the first shot, and then the player will be allowed to select a cell from the computer grid.  If the grid contains one of the computer ships, it will highlight red and increment the ship damage variable by one.  If the shot is a miss, then the cell will highlight blue and the computer will take its turn.</p>
+    <p>For the sake of simplicity, and to keep the game logic moving smoothly, I have decided that players will take turns selecting cells, no matter what the result.  This slight gamerule change ensures that the computer's ability to aim is not compromised.</p>
+    <p>If a ship was destroyed, a sound will play alerting the player that the ship is no longer in play.  This allows the player to recognize that further attempts to attack that ship will likely result in a miss.</p>
+    <p>The game will continue in this manner, updating the boards and alerting the player until either the computer fleet is destroyed or the player fleet is destroyed, during which and alert will pop up on the screen (to halt play and to draw the players' attention that the game is over.) indicating the results of the match.</p>
+    <p>After the player acknowledges the alert, a new button will appear near the top of the screen allowing the game to re-initialize and select a brand new ship configuration for the computer.</p>
+    <h3 align="center">EXTRA CREDIT</h3>
+    <p>Extra credit information will go here.</p>
+</body>
+</html>
