@@ -55,11 +55,26 @@ function main() {
     };
 
     // Save and Load game data
+
+    // Save Game Utility
     let saveButton = document.getElementById('save-game');
     saveButton.onclick = function () {
-
+        saveGame(game);
+        window.alert("Game Saved...");
+        return false;
     };
 
+    // Load Game Utility
+    let loadButton = document.getElementById('load-game');
+    loadButton.onclick = function () {
+        let saveGame = loadSaveGame();
+        game.grid = addShipsToGrid(saveGame.playerFleet, game.grid, true);
+        game.playerFleet = saveGame.playerFleet;
+        playerGrid.innerHTML = displayBoard(game.grid);
+        window.alert("Game Loaded...");
+        game.playerFleet;
+        return false;
+    };
 
     // Handle game play and turns
     let startGameButton = document.getElementById('start-game');
@@ -103,6 +118,7 @@ function main() {
                     let row = this.parentNode.rowIndex;
                     let cell = computerGrid.rows[row].cells[col];
                     if (cell.className === 'hidden-ship') {
+                        soundHit.play();
                         game.computerFleet = markShipHit(cell.id, game.computerFleet);
                         game.computerGrid = markGridHit(row - 1, col - 1, game.computerGrid);
                         computerGrid.innerHTML = displayBoard(game.computerGrid);
@@ -117,6 +133,7 @@ function main() {
                     }
                     else {
                         if (cell.className !== 'hit') {
+                            soundMiss.play();
                             game.computerGrid = markGridMiss(row - 1, col - 1, game.computerGrid);
                             computerGrid.innerHTML = displayBoard(game.computerGrid);
                         }
@@ -241,6 +258,7 @@ function main() {
             }
             else {
                 if (cell.className !== 'hit') {
+                    soundMiss.play();
                     game.grid = markGridMiss(row - 1, col - 1, game.grid);
                     playerGrid.innerHTML = displayBoard(game.grid);
                 }
@@ -268,7 +286,6 @@ function main() {
     //Returns   :
     function loadSaveGame() {
         let saveGame = localStorage.getItem('save-game');
-        window.alert("Game successfully loaded!");
         return JSON.parse(saveGame);
     }
 
