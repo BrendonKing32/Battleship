@@ -72,7 +72,6 @@ function main() {
         game.playerFleet = saveGame.playerFleet;
         playerGrid.innerHTML = displayBoard(game.grid);
         window.alert("Game Loaded...");
-        game.playerFleet;
         return false;
     };
 
@@ -99,9 +98,10 @@ function main() {
     //Parameters:none
     //Returns   :none
     function displayName() {
+        let authorName;
         let name = document.getElementById('developer-name');
         let JSON = loadJSON('scripts/game/configuration/config.json');
-        let authorName = JSON.game_info.author;
+        authorName = JSON.game_info.author;
         name.innerText = 'Written by: ' + authorName;
     }
 
