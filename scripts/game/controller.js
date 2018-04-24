@@ -258,7 +258,6 @@ function main() {
             }
             else {
                 if (cell.className !== 'hit') {
-                    soundMiss.play();
                     game.grid = markGridMiss(row - 1, col - 1, game.grid);
                     playerGrid.innerHTML = displayBoard(game.grid);
                 }
