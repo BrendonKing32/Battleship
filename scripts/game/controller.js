@@ -19,6 +19,7 @@ function main() {
     let soundGameWin = new Audio("media/audio/win.wav");
     let soundGameLose = new Audio("media/audio/lose.wav");
     let soundError = new Audio("media/audio/error.wav");
+    let soundNotification = new Audio("media/audio/notification.wav");
 
     // Initialize game Model and load computer ships
     let game = newGame();
@@ -63,8 +64,8 @@ function main() {
     let saveButton = document.getElementById('save-game');
     saveButton.onclick = function () {
         saveGame(game);
-        window.alert("Game Saved...");
-        return false;
+        soundNotification.play();
+        window.alert("Layout Saved...");
     };
 
     // Load Game Utility
@@ -74,8 +75,8 @@ function main() {
         game.grid = addShipsToGrid(saveGame.playerFleet, game.grid, true);
         game.playerFleet = saveGame.playerFleet;
         playerGrid.innerHTML = displayBoard(game.grid);
-        window.alert("Game Loaded...");
-        return false;
+        soundNotification.play();
+        window.alert("Layout Loaded...");
     };
 
     // Handle game play and turns
@@ -185,6 +186,7 @@ function main() {
             game.computerGuesses.push(point);
             let cell = playerGrid.rows[row].cells[col];
             if (cell.className === 'ship') {
+                soundHit.play();
                 game.playerFleet = markShipHit(cell.id, game.playerFleet);
                 game.grid = markGridHit(row - 1, col - 1, game.grid);
                 playerGrid.innerHTML = displayBoard(game.grid);
@@ -267,6 +269,7 @@ function main() {
             }
             else {
                 if (cell.className !== 'hit') {
+                    soundMiss.play();
                     game.grid = markGridMiss(row - 1, col - 1, game.grid);
                     playerGrid.innerHTML = displayBoard(game.grid);
                 }
