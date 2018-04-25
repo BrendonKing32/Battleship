@@ -26,13 +26,13 @@ Description :Semester project for CS 2550 at Utah Valley University
     </ol>
     <p>If both of those conditions are met, the system records the location of the ship and places the ship on the board for the player to see.  If it does not, the computer will issue an alert and the player will have to re-check the location.  once all five ships have been placed, the user will be able to interact with the "Start Game" button, beginning the match.</p>
     <p>The computer will take the first shot, and then the player will be allowed to select a cell from the computer grid.  If the grid contains one of the computer ships, it will highlight red and increment the ship damage variable by one.  If the shot is a miss, then the cell will highlight blue and the computer will take its turn.</p>
-    <p>For the sake of simplicity, and to keep the game logic moving smoothly, I have decided that players will take turns selecting cells, no matter what the result.  This slight gamerule change ensures that the computer's ability to aim is not compromised.</p>
     <p>If a ship was destroyed, a sound will play alerting the player that the ship is no longer in play.  This allows the player to recognize that further attempts to attack that ship will likely result in a miss.</p>
     <p>The game will continue in this manner, updating the boards and alerting the player until either the computer fleet is destroyed or the player fleet is destroyed, during which and alert will pop up on the screen (to halt play and to draw the players' attention that the game is over.) indicating the results of the match.</p>
     <p>After the player acknowledges the alert, a new button will appear near the top of the screen allowing the game to re-initialize and select a brand new ship configuration for the computer.</p>
+    <p>Program has been safely tested on Microsoft Edge, Opera, Firefox and Chrome.</p>
     <h3 align="center">EXTRA CREDIT</h3>
     <p>The two HTML5 components for the program are as follows:</p>
-    <p>The game plays audio on player moves to help indicate to the player if a square has been hit, or if the square was a miss.  Sound will sometimes not play if moves are made too quickly; this is a limitation on the sound files being used rather than the code itself.</p>
+    <p>The game plays audio on player moves to help indicate to the player if a square has been hit, or if the square was a miss.  Sound will sometimes not play if moves are made too quickly; this is a limitation on the sound files being used rather than the code itself.  Sound will also play at game win and at game loss, as well as a warning sound for incorrect placement or insufficient ships to start play.</p>
     <p>The game is able to load and remember player ship configuration for future games; this will speed up the game setup and allow for more play.  Configuration is stored in LocalStorage and accessed anytime someone pushes the "Load Layout" button.</p>
 </body>
 </html>
