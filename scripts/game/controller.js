@@ -18,6 +18,7 @@ function main() {
     let soundMiss = new Audio("media/audio/splash.wav");
     let soundGameWin = new Audio("media/audio/win.wav");
     let soundGameLose = new Audio("media/audio/lose.wav");
+    let soundError = new Audio("media/audio/error.wav");
 
     // Initialize game Model and load computer ships
     let game = newGame();
@@ -92,6 +93,7 @@ function main() {
             }
         }
         else {
+            soundError.play();
             window.alert("PLACE ALL SHIPS BEFORE STARTING MATCH!");
         }
     };

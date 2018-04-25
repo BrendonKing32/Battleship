@@ -17,7 +17,7 @@ function newGame() {
 // Objects
 
 //Function  :Game()
-//Purpose   :constructor method for the game.  Initializes all other variables
+//Purpose   :constructor method for the game.  Initializes all other letiables
 //Parameters:grid, computerGrid, playerFleet, computerFleet
 //Returns   :none
 function Game(grid, computerGrid, playerFleet, computerFleet) {
@@ -71,14 +71,14 @@ function Ship(size, location) {
 // Functions
 
 //Function  :initializeGame()
-//Purpose   :initializes game variables and overwrites old data
+//Purpose   :initializes game letiables and overwrites old data
 //Parameters:none
 //Returns   :game
 function initializeGame() {
-    var grid = createGridArray(10, 10);
-    var computerGrid = createGridArray(10, 10);
-    var playerFleet = new PlayerFleet();
-    var computerFleet = new ComputerFleet();
+    let grid = createGridArray(10, 10);
+    let computerGrid = createGridArray(10, 10);
+    let playerFleet = new PlayerFleet();
+    let computerFleet = new ComputerFleet();
 
     // Generates Player ships
     playerFleet.playerCarrier = new Ship(5, []);
@@ -94,7 +94,7 @@ function initializeGame() {
     computerFleet.computerSub = new Ship(3, []);
     computerFleet.computerDestroyer = new Ship(2, []);
 
-    var game = new Game(grid, computerGrid, playerFleet, computerFleet);
+    let game = new Game(grid, computerGrid, playerFleet, computerFleet);
     return game;
 }
 
@@ -103,10 +103,10 @@ function initializeGame() {
 //Parameters:x, y integers (for size)
 //Returns   :grid object
 function createGridArray(x, y) {
-    var grid = new Array();
-    for (var i = 0; i < x; i++) {
+    let grid = new Array();
+    for (let i = 0; i < x; i++) {
         grid[i] = new Array();
-        for (var j = 0; j < y; j++) {
+        for (let j = 0; j < y; j++) {
             grid[i][j] = '';
         }
     }
@@ -118,24 +118,28 @@ function createGridArray(x, y) {
 //Parameters:playerFleet array
 //Returns   :updated playerFleet array
 function placeShip(playerFleet) {
-    var ship = document.getElementById('input-ship').value;
-    var row = parseInt(document.getElementById('input-row').value) - 1;
-    var col = parseInt(document.getElementById('input-col').value) - 1;
+    let soundError = new Audio("media/audio/error.wav");
+    let ship = document.getElementById('input-ship').value;
+    let row = parseInt(document.getElementById('input-row').value) - 1;
+    let col = parseInt(document.getElementById('input-col').value) - 1;
 
     //check values
     if (col > 9 || row > 9) {
+        soundError.play();
         window.alert("You cannot place a ship out of bounds!");
         return false;
     }
-    var direction = document.getElementById('input-direction').value;
-    var location = [];
+    let direction = document.getElementById('input-direction').value;
+    let location = [];
     if (playerFleet[ship].shipLocation.length > 0) {
+        soundError.play();
         window.alert("That ship has been placed!");
         return false;
     }
     if (direction == 'horizontal') {
-        for (var i = 0; i < playerFleet[ship].shipSize; i++) {
+        for (let i = 0; i < playerFleet[ship].shipSize; i++) {
             if (col + playerFleet[ship].shipSize > 10) {
+                soundError.play();
                 window.alert("You cannot place a ship out of bounds!");
                 return false;
             }
@@ -143,8 +147,9 @@ function placeShip(playerFleet) {
         }
     }
     else if (direction == 'vertical') {
-        for (var i = 0; i < playerFleet[ship].shipSize; i++) {
+        for (let i = 0; i < playerFleet[ship].shipSize; i++) {
             if (row + playerFleet[ship].shipSize > 10) {
+                soundError.play();
                 window.alert("You cannot place a ship out of bounds!");
                 return false;
             }
