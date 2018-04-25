@@ -271,18 +271,18 @@ function main() {
     }
 
     //Function  :saveGame()
-    //Purpose   :
-    //Parameters:
-    //Returns   :
+    //Purpose   :saves player configuration for future use
+    //Parameters:game object
+    //Returns   :none
     function saveGame(game) {
         let gameData = JSON.stringify(game);
         localStorage.setItem('save-game', gameData);
     }
 
     //Function  :loadSaveGame()
-    //Purpose   :
-    //Parameters:
-    //Returns   :
+    //Purpose   :loads the saved configuration from LocalStorage
+    //Parameters:none
+    //Returns   :JSON saveGame
     function loadSaveGame() {
         let saveGame = localStorage.getItem('save-game');
         return JSON.parse(saveGame);
@@ -421,5 +421,3 @@ function main() {
         window.open('login.html', '', 'width=350,height=200');
     }
 }
-
-
