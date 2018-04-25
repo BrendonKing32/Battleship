@@ -16,6 +16,8 @@ function main() {
     // Initialize sound files
     let soundHit = new Audio("media/audio/explode.wav");
     let soundMiss = new Audio("media/audio/splash.wav");
+    let soundGameWin = new Audio("media/audio/win.wav");
+    let soundGameLose = new Audio("media/audio/lose.wav");
 
     // Initialize game Model and load computer ships
     let game = newGame();
@@ -89,6 +91,9 @@ function main() {
                 playerAttack();
             }
         }
+        else {
+            window.alert("PLACE ALL SHIPS BEFORE STARTING MATCH!");
+        }
     };
 
     // Controller functions
@@ -124,6 +129,7 @@ function main() {
                         computerGrid.innerHTML = displayBoard(game.computerGrid);
                         if (game.computerFleet[cell.id].sunk === true) {
                             if (game.computerFleet.shipsSunk === 5) {
+                                soundGameWin.play();
                                 window.alert("YOU WIN!!!");
                                 document.getElementById('start-game').style.visibility = 'visible';
                                 document.getElementById('start-game').innerHTML = 'START GAME';
@@ -136,9 +142,9 @@ function main() {
                             soundMiss.play();
                             game.computerGrid = markGridMiss(row - 1, col - 1, game.computerGrid);
                             computerGrid.innerHTML = displayBoard(game.computerGrid);
+                            setTimeout(computerAttack, 1500);
                         }
                     }
-                    setTimeout(computerAttack, 1000);
                     playerAttack();
                 }
             }
@@ -182,10 +188,10 @@ function main() {
                 playerGrid.innerHTML = displayBoard(game.grid);
                 if (game.playerFleet[cell.id].sunk === true) {
                     if (game.playerFleet.shipsSunk === 5) {
+                        soundGameLose.play();
                         window.alert("You lost...");
                         document.getElementById('start-game').style.visibility = 'visible';
                         document.getElementById('start-game').innerHTML = 'NEW GAME';
-                        playerAttack();
                     }
                 }
                 // Make the next guess adjacent or close to the previous guess if it's a hit
@@ -255,6 +261,7 @@ function main() {
                         }
                     }
                 }
+                setTimeout(computerAttack, 1500);
             }
             else {
                 if (cell.className !== 'hit') {
