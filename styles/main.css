@@ -46,18 +46,18 @@ button {
 }
 
 h1 {
-    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif
+    font-family: 'Ubuntu'
 }
 
 h2 {
     background: darkgray;
-    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif
+    font-family: 'Ubuntu'
 }
 
 h3 {
     background: black;
     color: white;
-    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif
+    font-family: 'Ubuntu'
 }
 
 h4 {
@@ -65,17 +65,17 @@ h4 {
     text-align: center;
     background: black;
     color: white;
-    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif
+    font-family: 'Ubuntu'
 }
 
 p {
     margin-right: 15px;
     margin-left: 15px;
-    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif
+    font-family: 'Ubuntu'
 }
 
 ol {
-    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif
+    font-family: 'Ubuntu'
 }
 
 img {
@@ -83,7 +83,7 @@ img {
 }
 
 caption {
-    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif
+    font-family: 'Ubuntu'
 }
 
 td, th {
@@ -93,7 +93,7 @@ td, th {
     border-width: 1px;
     width: 50px;
     height: 50px;
-    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif
+    font-family: 'Ubuntu'
 }
 
 td:hover {
@@ -110,18 +110,4 @@ td:hover {
 
 .miss {
     background-color:blue;
-}
-
-#container {
-    width: 500px;
-    height: 500px;
-    position: relative;
-    background: lightblue;
-}
-
-#animate {
-    width: 50px;
-    height: 50px;
-    position: absolute;
-    background: blue;
 }
